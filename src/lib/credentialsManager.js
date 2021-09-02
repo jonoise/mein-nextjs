@@ -26,7 +26,7 @@ export const credentialsManager = async (credentials) => {
                 return {
                     error: {
                         message,
-                        query: 'Ya existe un usuario asociado a ese email.'
+                        query: '⛔ Ya existe un usuario asociado a ese email.'
                     }
                 }
             }

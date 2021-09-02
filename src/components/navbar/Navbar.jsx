@@ -208,7 +208,7 @@ const DisplayMessage = ({ setMessage, children }) => {
         fontWeight="bold"
         color="black"
       >
-        <Text>⛔ {children}</Text>
+        <Text>{children}</Text>
         <Flex
           color="#1a1a1a"
           display={displayMessage ? 'block' : 'none'}

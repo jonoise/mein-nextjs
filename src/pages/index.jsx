@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/react'
 import DefaultHead from '../components/head/DefaultHead'
 import HomeLayout from '../components/home/HomeLayout'
+import Navbar from '../components/navbar/Navbar'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
           rel="stylesheet"
         />
       </DefaultHead>
+      <Navbar />
       <HomeLayout />
       <Flex w="full" minH="100vh"></Flex>
     </>

@@ -11,7 +11,6 @@ const MyApp = ({ Component, pageProps }) => {
     <NextAuthProvider session={pageProps.session}>
       <ChakraProvider>
         <CSSReset />
-        <Navbar />
         <Component {...pageProps} />
       </ChakraProvider>
     </NextAuthProvider>

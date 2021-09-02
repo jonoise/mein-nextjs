@@ -3,6 +3,7 @@ import { getSession } from 'next-auth/client'
 import LoginButton from '../components/buttons/SocialButton'
 import DefaultHead from '../components/head/DefaultHead'
 import LoginForm from '../components/login/LoginForm'
+import Navbar from '../components/navbar/Navbar'
 import { containerSection } from '../constants'
 
 const login = () => {
@@ -18,6 +19,7 @@ const login = () => {
           rel="stylesheet"
         />
       </DefaultHead>
+      <Navbar />
       <Stack {...containerSection}>
         <Stack
           w={{ base: '100%', md: '60%', lg: '80%', '2xl': '40%' }}

@@ -3,11 +3,13 @@ import { getSession } from 'next-auth/client'
 import LoginButton from '../components/buttons/SocialButton'
 import DefaultHead from '../components/head/DefaultHead'
 import LoginForm from '../components/login/LoginForm'
+import Navbar from '../components/navbar/Navbar'
 import RegisterForm from '../components/register/RegisterForm'
 import { containerSection } from '../constants'
 const register = () => {
   return (
     <>
+      <Navbar />
       <DefaultHead title="Register">
         <link
           href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"

@@ -1,0 +1,35 @@
+:root {
+  --main-color: #11a;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.InputFront {
+  height: 100%;
+  border: 2px solid black;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+.ButtonFront {
+  height: 100%;
+  background-color: black;
+  color: white;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: 0px 18px;
+  outline: none;
+  font-weight: 700;
+}
+
+.black-line {
+  width: 10rem;
+  height: 0;
+  border-top: 2px solid black;
+}

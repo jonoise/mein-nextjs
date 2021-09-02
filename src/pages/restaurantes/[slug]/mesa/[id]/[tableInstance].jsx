@@ -1,5 +1,27 @@
+import { io } from 'socket.io-client'
+
+const socket = io('http://localhost:4000')
+socket.on('vuelta', (saludo) => {
+  console.log(saludo)
+})
+
 const tableInstance = () => {
-  return <div>res</div>
+  socket.emit('message', 'We are casting!')
+
+  const saludar = () => {
+    socket.emit('saludo', 'Yey!🎉')
+  }
+
+  return (
+    <div>
+      <button
+        onClick={saludar}
+        style={{ padding: '10px', background: 'yellow' }}
+      >
+        saludar
+      </button>
+    </div>
+  )
 }
 
 export default tableInstance

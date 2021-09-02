@@ -19,7 +19,7 @@ import { useRouter } from 'next/router'
 import { handleQueryMessage } from './handleMessage'
 import { FaTimes } from 'react-icons/fa'
 
-const NAV_ITEMS = ['HOME', 'REGISTER']
+const NAV_ITEMS = ['HOME', 'REGISTER', 'TEST']
 
 const Navbar = () => {
   const router = useRouter()

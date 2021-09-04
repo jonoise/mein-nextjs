@@ -1,33 +1,65 @@
 import { io } from 'socket.io-client'
-
+import { useToast } from '@chakra-ui/toast'
+import axiosWithJWT from '../../../../../lib/axios'
 const socket = io('http://localhost:4000')
-socket.on('vuelta', (saludo) => {
-  console.log(saludo)
-})
 
-const tableInstance = () => {
-  socket.emit('message', 'We are casting!')
+const TableInstance = (props) => {
+  const { tableInstance } = props
+  const toast = useToast()
 
-  const saludar = () => {
-    socket.emit('saludo', 'Yey!🎉')
-  }
+  socket.on('connect', () => {
+    socket.emit('new-user', tableInstance, 'Marito Mortadela')
+  })
+
+  socket.on('new-user', (user) => {
+    toast({
+      id: user,
+      title: `${user} ingresó a la mesa.`,
+      position: 'top',
+    })
+  })
+
+  const handleLog = () => {}
 
   return (
     <div>
       <button
-        onClick={saludar}
+        onClick={handleLog}
         style={{ padding: '10px', background: 'yellow' }}
       >
-        saludar
+        log
       </button>
     </div>
   )
 }
 
-export default tableInstance
+export default TableInstance
 
 export const getServerSideProps = async (context) => {
   const { slug, id, tableInstance } = context.params
   // DO VERIFICATION WITH SERVER FOR THIS TABLE INSTACE
-  return { props: {} }
+
+  const res = await axiosWithJWT(
+    'POST',
+    `/table-instances/reject/`,
+    { tableInstance },
+    null
+  )
+
+  if (res.reject) {
+    return {
+      redirect: {
+        destination: `/sorry`,
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {
+      slug,
+      id,
+      tableInstance,
+    },
+  }
 }

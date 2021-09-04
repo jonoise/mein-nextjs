@@ -1,36 +1,18 @@
-import { io } from 'socket.io-client'
-import { useToast } from '@chakra-ui/toast'
 import axiosWithJWT from '../../../../../lib/axios'
-const socket = io('http://localhost:4000')
+import TableLayout from '../../../../../components/socket_table/TableLayout'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { setTableInstance } from '../../../../../components/socket_table/tableSlice'
 
 const TableInstance = (props) => {
   const { tableInstance } = props
-  const toast = useToast()
+  const dispatch = useDispatch()
 
-  socket.on('connect', () => {
-    socket.emit('new-user', tableInstance, 'Marito Mortadela')
+  useEffect(() => {
+    dispatch(setTableInstance(tableInstance))
   })
 
-  socket.on('new-user', (user) => {
-    toast({
-      id: user,
-      title: `${user} ingresó a la mesa.`,
-      position: 'top',
-    })
-  })
-
-  const handleLog = () => {}
-
-  return (
-    <div>
-      <button
-        onClick={handleLog}
-        style={{ padding: '10px', background: 'yellow' }}
-      >
-        log
-      </button>
-    </div>
-  )
+  return <TableLayout />
 }
 
 export default TableInstance

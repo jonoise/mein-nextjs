@@ -3,6 +3,7 @@ import {
 } from "@reduxjs/toolkit";
 
 const initialState = {
+    instance_uuid: null,
     userAdded: false,
     table: null,
     session: null,
@@ -17,6 +18,9 @@ const tableSlice = createSlice({
     reducers: {
         toggleUserAdded: (state) => {
             state.userAdded = !state.userAdded
+        },
+        setTableInstance: (state, action) => {
+            state.instance_uuid = action.payload
         }
     }
 
@@ -24,6 +28,7 @@ const tableSlice = createSlice({
 
 export const {
     toggleUserAdded,
+    setTableInstance
 } = tableSlice.actions
 
 export const selectTableSlice = state => state.tableSlice

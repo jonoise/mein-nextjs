@@ -9,10 +9,12 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     // <ReduxProvider store={store}>
     <NextAuthProvider session={pageProps.session}>
-      <ChakraProvider>
-        <CSSReset />
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <ReduxProvider store={store}>
+        <ChakraProvider>
+          <CSSReset />
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </ReduxProvider>
     </NextAuthProvider>
     // </ReduxProvider>
   )

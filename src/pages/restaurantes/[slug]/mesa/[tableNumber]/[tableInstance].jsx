@@ -4,13 +4,14 @@ import { useEffect } from 'react'
 import useTableStore from '../../../../../components/socket_table/tableStore'
 import socket from '../../../../../components/socket_table/socketConnect'
 import { useToast } from '@chakra-ui/toast'
-const TableInstance = ({ tableInstance }) => {
+const TableInstance = ({ tableNumber, tableInstance }) => {
   const initTable = useTableStore((state) => state.initTable)
   const toast = useToast()
   useEffect(() => {
     socket.connect()
     socket.emit('joinTable', tableInstance)
-    initTable(tableInstance)
+    initTable({ tableInstance, tableNumber })
+
     return () => {
       socket.disconnect()
     }
@@ -31,7 +32,7 @@ const TableInstance = ({ tableInstance }) => {
 export default TableInstance
 
 export const getServerSideProps = async (context) => {
-  const { slug, id, tableInstance } = context.params
+  const { slug, tableNumber, tableInstance } = context.params
   // DO VERIFICATION WITH SERVER FOR THIS TABLE INSTACE
 
   const res = await axiosWithJWT(
@@ -53,7 +54,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       slug,
-      id,
+      tableNumber,
       tableInstance,
     },
   }

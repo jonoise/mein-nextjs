@@ -15,18 +15,13 @@ export const getServerSideProps = async (context) => {
       { table_uuid },
       null
     )
-
     return {
       redirect: {
-        destination: `/restaurantes/${instance.restaurant}/mesa/${instance.table}/${instance.uuid}`,
+        destination: `/restaurantes/${instance.restaurant}/mesa/${instance.tableNumber}/${instance.uuid}`,
         permanent: false,
       },
     }
   } catch (error) {
     // handle error for client
-  }
-
-  return {
-    props: {},
   }
 }

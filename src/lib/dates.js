@@ -1,4 +1,8 @@
-const dateStringify = (dateString) => {
+import dayjs from "dayjs"
+import LocalizedFormat from "dayjs/plugin/localizedFormat"
+dayjs.extend(LocalizedFormat)
+
+export const dateStringify = (dateString) => {
     const date = dateString.split('T')[0]
 
     const months = {
@@ -27,4 +31,10 @@ const dateStringify = (dateString) => {
     return newDate
 }
 
-export default dateStringify
+export const getCurrentDate = () => {
+    return dayjs().format("L")
+}
+
+export const getCurrentTime = () => {
+    return dayjs().format("LTS")
+}

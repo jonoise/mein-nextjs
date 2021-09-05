@@ -1,15 +1,28 @@
 import axiosWithJWT from '../../../../../lib/axios'
 import TableLayout from '../../../../../components/socket_table/TableLayout'
-import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { setTableInstance } from '../../../../../components/socket_table/tableSlice'
-
-const TableInstance = (props) => {
-  const { tableInstance } = props
-  const dispatch = useDispatch()
-
+import useTableStore from '../../../../../components/socket_table/tableStore'
+import socket from '../../../../../components/socket_table/socketConnect'
+import { useToast } from '@chakra-ui/toast'
+const TableInstance = ({ tableInstance }) => {
+  const initTable = useTableStore((state) => state.initTable)
+  const toast = useToast()
   useEffect(() => {
-    dispatch(setTableInstance(tableInstance))
+    socket.connect()
+    socket.emit('joinTable', tableInstance)
+    initTable(tableInstance)
+    return () => {
+      socket.disconnect()
+    }
+  }, [])
+
+  socket.on('userAdded', (user) => {
+    toast({
+      id: user,
+      title: `${user} se unió a la mesa.`,
+      position: 'top',
+      status: 'success',
+    })
   })
 
   return <TableLayout />

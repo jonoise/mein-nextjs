@@ -1,15 +1,18 @@
 import { VStack, useToast } from '@chakra-ui/react'
 import { useState } from 'react'
 import { io } from 'socket.io-client'
+import NameModal from './modals/NameModal'
+import useTableStore from './tableStore'
 
 const socket = io('http://localhost:4000')
 
 const TableLayout = () => {
   const [user, setUser] = useState(null)
   const toast = useToast()
+  const instance_uuid = useTableStore((state) => state.instance_uuid)
 
   socket.on('connect', () => {
-    socket.emit('new-user', tableInstance)
+    socket.emit('new-user', instance_uuid)
   })
 
   socket.on('new-user', (user) => {
@@ -23,12 +26,7 @@ const TableLayout = () => {
   const addUser = () => {}
   return (
     <VStack minH="100vh" bg="facebook.500">
-      <button
-        onClick={addUser}
-        style={{ padding: '10px', background: 'yellow' }}
-      >
-        log
-      </button>
+      <NameModal />
     </VStack>
   )
 }

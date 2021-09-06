@@ -51,6 +51,8 @@ const NameModal = () => {
     const exists = users[newUser.id]
 
     if (exists) {
+      addUser(newUser)
+      socket.emit('rename', newUser)
       setIsOpen(false)
       return
     }

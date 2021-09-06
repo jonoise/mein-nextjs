@@ -8,6 +8,7 @@ import useTableStore from '../../../../../../components/socket_table/tableStore'
 const Instance_Uuid = ({ rest_id, tableNumber, instance_uuid }) => {
   const initTable = useTableStore((state) => state.initTable)
   const setRestaurant = useTableStore((state) => state.setRestaurant)
+  const setMenu = useTableStore((state) => state.setMenu)
   const toast = useToast()
   useEffect(() => {
     socket.connect('/')
@@ -19,16 +20,23 @@ const Instance_Uuid = ({ rest_id, tableNumber, instance_uuid }) => {
     }
   }, [])
   useEffect(() => {
-    const fetchRestaurant = async () => {
+    const fetchRestaurantAndMenu = async () => {
       const restaurant = await axiosWithJWT(
         'GET',
         `/restaurants/${rest_id}`,
         null,
         null
       )
+      const menu = await axiosWithJWT(
+        'GET',
+        `/menus/${restaurant.main_menu}`,
+        null,
+        null
+      )
       setRestaurant(restaurant)
+      setMenu(menu)
     }
-    fetchRestaurant()
+    fetchRestaurantAndMenu()
   }, [])
   socket.on('connect', () => {
     socket.emit('new-user', instance_uuid)

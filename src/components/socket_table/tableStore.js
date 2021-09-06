@@ -7,6 +7,7 @@ const useTableStore = create(devtools((set, get) => ({
     instance_uuid: null,
     tableNumber: null,
     restaurant: null,
+    menu: null,
     currentUser: null,
     users: {},
     totalAmount: 0,
@@ -21,6 +22,12 @@ const useTableStore = create(devtools((set, get) => ({
         set(state => ({
             ...state,
             restaurant: restaurant
+        }))
+    },
+    setMenu: (menu) => {
+        set(state => ({
+            ...state,
+            menu: menu
         }))
     },
     addUser: (newUser) => {

@@ -16,6 +16,12 @@ const useTableStore = create(devtools((set, get) => ({
             tableNumber: payload.tableNumber,
         }))
     },
+    setRestaurant: (restaurant) => {
+        set(state => ({
+            ...state,
+            restaurant: restaurant
+        }))
+    },
     addUser: (newUser) => {
         set(state => ({
             ...state,

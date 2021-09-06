@@ -1,26 +1,32 @@
 import axiosWithJWT from '../../../../../lib/axios'
 import TableLayout from '../../../../../components/socket_table/TableLayout'
 import { useEffect } from 'react'
-import useTableStore from '../../../../../components/socket_table/tableStore'
-import socket from '../../../../../components/socket_table/socketConnect'
 import { useToast } from '@chakra-ui/toast'
-const TableInstance = ({ tableNumber, tableInstance }) => {
+import socket from '../../../../../components/socket_table/socketConnect'
+import useTableStore from '../../../../../components/socket_table/tableStore'
+
+const Instance_Uuid = ({ tableNumber, instance_uuid }) => {
   const initTable = useTableStore((state) => state.initTable)
   const toast = useToast()
   useEffect(() => {
-    socket.connect()
-    socket.emit('joinTable', tableInstance)
-    initTable({ tableInstance, tableNumber })
+    socket.connect('/')
+    socket.emit('joinTable', instance_uuid)
+    initTable({ instance_uuid, tableNumber })
 
     return () => {
       socket.disconnect()
     }
   }, [])
 
+  socket.on('connect', () => {
+    socket.emit('new-user', instance_uuid)
+  })
+
   socket.on('userAdded', (user) => {
+    console.log(user)
     toast({
       id: user,
-      title: `${user} se unió a la mesa.`,
+      title: `${user.name} se unió a la mesa.`,
       position: 'top',
       status: 'success',
     })
@@ -29,16 +35,16 @@ const TableInstance = ({ tableNumber, tableInstance }) => {
   return <TableLayout />
 }
 
-export default TableInstance
+export default Instance_Uuid
 
 export const getServerSideProps = async (context) => {
-  const { slug, tableNumber, tableInstance } = context.params
+  const { slug, tableNumber, instance_uuid } = context.params
   // DO VERIFICATION WITH SERVER FOR THIS TABLE INSTACE
 
   const res = await axiosWithJWT(
     'POST',
     `/table-instances/reject/`,
-    { tableInstance },
+    { instance_uuid },
     null
   )
 
@@ -55,7 +61,7 @@ export const getServerSideProps = async (context) => {
     props: {
       slug,
       tableNumber,
-      tableInstance,
+      instance_uuid,
     },
   }
 }

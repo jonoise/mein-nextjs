@@ -22,30 +22,47 @@ import socket from '../socketConnect'
 import useTableStore from '../tableStore'
 
 const NameModal = () => {
-  const firstField = useRef()
+  const [userName, setUserName] = useState('')
   const [isOpen, setIsOpen] = useState(true)
+  const firstField = useRef()
   const instance_uuid = useTableStore((state) => state.instance_uuid)
   const tableNumber = useTableStore((state) => state.tableNumber)
-  const currentUser = useTableStore((state) => state.currentUser)
-  const setCurrentUser = useTableStore((state) => state.setCurrentUser)
+
+  const users = useTableStore((state) => state.users)
+  const addUser = useTableStore((state) => state.addUser)
 
   const handleNameChange = (e) => {
-    setCurrentUser(e.target.value)
+    setUserName(e.target.value)
   }
 
+  // Se agrega el user al state y al socket server.
   const addUserHandler = () => {
-    if (currentUser.length > 0) {
-      socket.emit('addUser', instance_uuid, currentUser)
-      setIsOpen(false)
+    const newUser = {
+      id: socket.id,
+      name: userName,
+      instance_uuid,
+      dishes: [],
+      total: 0,
     }
-    return
+
+    const exists = users[newUser.id]
+
+    if (exists) {
+      setIsOpen(false)
+      return
+    }
+
+    if (userName.length < 1) {
+      return
+    }
+
+    addUser(newUser)
+    socket.emit('addUser', instance_uuid, newUser)
+    setIsOpen(false)
   }
 
   const onOpen = () => {
     setIsOpen(true)
-  }
-  const onClose = () => {
-    setIsOpen(false)
   }
 
   return (
@@ -61,7 +78,6 @@ const NameModal = () => {
       >
         <DrawerOverlay />
         <DrawerContent bg={styles.dimWhite} color="black">
-          <DrawerCloseButton onClick={onClose} />
           <DrawerHeader borderBottomWidth="1px" borderColor="black">
             MESA {tableNumber}
           </DrawerHeader>
@@ -75,7 +91,7 @@ const NameModal = () => {
                   onChange={handleNameChange}
                   borderColor="black"
                   _placeholder={{ color: '#1a1a1a8e' }}
-                  value={currentUser}
+                  value={userName}
                 />
               </VStack>
               <Stack>

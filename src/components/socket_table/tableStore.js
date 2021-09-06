@@ -7,6 +7,7 @@ const useTableStore = create(devtools((set, get) => ({
     instance_uuid: null,
     tableNumber: null,
     restaurant: null,
+    currentUser: null,
     users: {},
     totalAmount: 0,
     initTable: (payload) => {
@@ -25,6 +26,7 @@ const useTableStore = create(devtools((set, get) => ({
     addUser: (newUser) => {
         set(state => ({
             ...state,
+            currentUser: newUser,
             users: {
                 ...state.users,
                 [newUser.id]: newUser

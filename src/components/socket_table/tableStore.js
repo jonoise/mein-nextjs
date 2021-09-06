@@ -5,29 +5,38 @@ import {
 
 const useTableStore = create(devtools((set, get) => ({
     instance_uuid: null,
-    userAdded: false,
     tableNumber: null,
-    session: null,
-    currentUser: "",
-    users: [],
-    dishes: [],
+    restaurant: null,
+    users: {},
     totalAmount: 0,
-    toggleUserAdded: () => set(state => ({
-        ...state,
-        userAdded: !userAdded
-    })),
     initTable: (payload) => {
         set(state => ({
             ...state,
-            instance_uuid: payload.tableInstance,
+            instance_uuid: payload.instance_uuid,
             tableNumber: payload.tableNumber,
         }))
     },
-    setCurrentUser: (payload) => {
-        set((state) => ({
+    addUser: (newUser) => {
+        set(state => ({
             ...state,
-            currentUser: payload
+            users: {
+                ...state.users,
+                [newUser.id]: newUser
+            }
         }))
+    },
+    setAddDish: (id, dish) => {
+        set(state => {
+            const newList = users.map(user => {
+                if (user.id === id) {
+                    user.dishes.push(dish)
+                }
+            })
+            return {
+                ...state,
+                users: newList
+            }
+        })
     }
 })))
 

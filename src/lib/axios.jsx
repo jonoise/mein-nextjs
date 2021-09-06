@@ -68,7 +68,7 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
       try {
         const res = await axiosInstance.get(endpoint)
         const data = await res.data
-        console.log('AXIOS GET REQUEST: ', data)
+        // console.log('AXIOS GET REQUEST: ', data)
         return data
       } catch (error) {
         console.log('GET SWITCH ERROR: ', error)
@@ -79,7 +79,7 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
         console.log('starting...')
         const res = await axiosInstance.post(endpoint, obj)
         const data = await res.data
-        console.log('AXIOS POST REQUEST: ', data)
+        // console.log('AXIOS POST REQUEST: ', data)
         return data
       } catch (error) {
         console.log('POST SWITCH ERROR: ', error)
@@ -90,7 +90,7 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
       try {
         const res = await axiosInstance.delete(endpoint, { data: obj })
         const data = await res.data
-        console.log('AXIOS DELETE REQUEST: ', data)
+        // console.log('AXIOS DELETE REQUEST: ', data)
         return data
       } catch (error) {
         console.log('DELETE SWITCH ERROR: ', error)
@@ -100,7 +100,7 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
       try {
         const res = await axiosInstance.patch(endpoint, obj)
         const data = await res.data
-        console.log('AXIOS PATCH REQUEST: ', data)
+        // console.log('AXIOS PATCH REQUEST: ', data)
         return data
       } catch (error) {
         console.log('PATCH SWITCH ERROR: ', error)
@@ -110,7 +110,7 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
       try {
         const res = await axiosInstance.put(endpoint, obj)
         const data = await res.data
-        console.log('AXIOS PUT REQUEST: ', data)
+        // console.log('AXIOS PUT REQUEST: ', data)
         return data
       } catch (error) {
         console.log('PUT SWITCH ERROR: ', error)

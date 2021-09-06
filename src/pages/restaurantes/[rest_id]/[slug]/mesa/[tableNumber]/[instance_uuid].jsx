@@ -1,12 +1,13 @@
-import axiosWithJWT from '../../../../../lib/axios'
-import TableLayout from '../../../../../components/socket_table/TableLayout'
+import axiosWithJWT from '../../../../../../lib/axios'
+import TableLayout from '../../../../../../components/socket_table/TableLayout'
 import { useEffect } from 'react'
 import { useToast } from '@chakra-ui/toast'
-import socket from '../../../../../components/socket_table/socketConnect'
-import useTableStore from '../../../../../components/socket_table/tableStore'
+import socket from '../../../../../../components/socket_table/socketConnect'
+import useTableStore from '../../../../../../components/socket_table/tableStore'
 
-const Instance_Uuid = ({ tableNumber, instance_uuid }) => {
+const Instance_Uuid = ({ rest_id, tableNumber, instance_uuid }) => {
   const initTable = useTableStore((state) => state.initTable)
+  const setRestaurant = useTableStore((state) => state.setRestaurant)
   const toast = useToast()
   useEffect(() => {
     socket.connect('/')
@@ -17,7 +18,18 @@ const Instance_Uuid = ({ tableNumber, instance_uuid }) => {
       socket.disconnect()
     }
   }, [])
-
+  useEffect(() => {
+    const fetchRestaurant = async () => {
+      const restaurant = await axiosWithJWT(
+        'GET',
+        `/restaurants/${rest_id}`,
+        null,
+        null
+      )
+      setRestaurant(restaurant)
+    }
+    fetchRestaurant()
+  }, [])
   socket.on('connect', () => {
     socket.emit('new-user', instance_uuid)
   })
@@ -38,7 +50,7 @@ const Instance_Uuid = ({ tableNumber, instance_uuid }) => {
 export default Instance_Uuid
 
 export const getServerSideProps = async (context) => {
-  const { slug, tableNumber, instance_uuid } = context.params
+  const { rest_id, slug, tableNumber, instance_uuid } = context.params
   // DO VERIFICATION WITH SERVER FOR THIS TABLE INSTACE
 
   const res = await axiosWithJWT(
@@ -59,6 +71,7 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
+      rest_id,
       slug,
       tableNumber,
       instance_uuid,

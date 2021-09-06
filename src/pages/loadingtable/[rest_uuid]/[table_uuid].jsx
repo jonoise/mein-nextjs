@@ -7,7 +7,7 @@ const table_uuid = () => {
 export default table_uuid
 
 export const getServerSideProps = async (context) => {
-  const { rest_uuid, table_uuid, res } = context.query
+  const { table_uuid } = context.query
   try {
     const instance = await axiosWithJWT(
       'POST',
@@ -17,7 +17,7 @@ export const getServerSideProps = async (context) => {
     )
     return {
       redirect: {
-        destination: `/restaurantes/${instance.restaurant}/mesa/${instance.tableNumber}/${instance.uuid}`,
+        destination: `/restaurantes/${instance.restaurant.id}/${instance.restaurant.slug}/mesa/${instance.tableNumber}/${instance.uuid}`,
         permanent: false,
       },
     }

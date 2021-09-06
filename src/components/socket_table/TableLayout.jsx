@@ -1,5 +1,6 @@
 import { Flex, useToast } from '@chakra-ui/react'
 import BotNav from './nav/BotNav'
+import Welcome from './Welcome'
 import socket from './socketConnect'
 
 const TableLayout = () => {
@@ -15,6 +16,7 @@ const TableLayout = () => {
 
   return (
     <Flex minH="100vh" bg="facebook.500" direction="column">
+      <Welcome />
       <BotNav />
     </Flex>
   )

@@ -1,16 +1,15 @@
 import { Flex, Stack, Text, Image, Box, Icon, Badge } from '@chakra-ui/react'
 import { GiMeat } from 'react-icons/gi'
 const SingleDish = ({ dish }) => {
-  console.log(dish)
+  const { name, description, price } = dish
   return (
     <Flex w="full" h="full" bg="#fefef3" p="2" rounded="md" shadow="lg">
-      <Flex w="30%" minH="full">
+      <Flex w="30%" minH="5rem" maxH="5rem">
         <Image
           src={dish.image}
-          // style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
           roundedLeft="md"
-          maxW="100%"
-          maxHeight="100%"
+          w="100%"
+          h="100%"
           objectFit="cover"
         />
       </Flex>
@@ -18,29 +17,32 @@ const SingleDish = ({ dish }) => {
         direction="column"
         minH="full"
         w="full"
+        justify="space-between"
         roundedRight="md"
         bg="fefef3"
-        p="1"
+        p="2"
         border="1px solid #ffc1c1"
         borderLeft="none"
       >
         <Flex justify="space-between" align="start">
           <Box>
-            <Text fontSize="14px" fontWeight="semibold" color="black">
-              {dish.name}
+            <Text fontSize="16px" fontWeight="semibold" color="black">
+              {name}
             </Text>
             <Text fontSize="10px" color="black">
-              {dish.sides}
+              {description.length < 40
+                ? description
+                : `${description.slice(0, 40)}...`}
             </Text>
           </Box>
           <Flex p="2px" rounded="full" border="1px solid black">
             <Icon as={GiMeat} w="18px" h="18px" />
           </Flex>
         </Flex>
-        <Flex justify="space-between" align="end">
+        <Flex justify="right" align="end">
           <Box></Box>
           <Badge variant="solid" colorScheme="green">
-            {dish.price}
+            ₡ {price}
           </Badge>
         </Flex>
       </Flex>

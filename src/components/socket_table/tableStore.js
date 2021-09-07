@@ -8,6 +8,7 @@ const useTableStore = create(devtools((set, get) => ({
     tableNumber: null,
     restaurant: null,
     menu: null,
+    stateCategory: null,
     currentUser: null,
     users: {},
     totalAmount: 0,
@@ -28,6 +29,12 @@ const useTableStore = create(devtools((set, get) => ({
         set(state => ({
             ...state,
             menu: menu
+        }))
+    },
+    setStateCategory: (category) => {
+        set(state => ({
+            ...state,
+            stateCategory: category
         }))
     },
     addUser: (newUser) => {

@@ -1,28 +1,30 @@
-import { Flex, IconButton } from '@chakra-ui/react'
-import { AiFillGift } from 'react-icons/ai'
+import { Flex, Text } from '@chakra-ui/react'
+import WaiterModal from '../modals/WaiterModal'
+import useTableStore from '../tableStore'
 
-import socket from '../socketConnect'
-
-const BotNav = () => {
-  const showServerUserList = () => {
-    socket.emit('displayUsers')
-  }
+const TopNav = () => {
+  const tableNumber = useTableStore((state) => state.tableNumber)
 
   return (
     <Flex
       position="fixed"
       top="0"
-      bg="cyan.200"
-      zIndex="1"
+      bg="#fee"
+      zIndex="9"
       minH="10px"
       w="full"
       p="2"
+      justify="space-between"
+      align="center"
+      borderBottom="2px solid #1a1a1a"
     >
-      <IconButton size="sm" onClick={showServerUserList}>
-        <AiFillGift />
-      </IconButton>
+      <WaiterModal />
+      <Text fontSize="18px" fontWeight="semibold">
+        Mesa {tableNumber && tableNumber}
+      </Text>
+      <WaiterModal />
     </Flex>
   )
 }
 
-export default BotNav
+export default TopNav

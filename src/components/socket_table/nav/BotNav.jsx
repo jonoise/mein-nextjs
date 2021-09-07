@@ -1,14 +1,7 @@
-import { Flex, IconButton } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import NameModal from '../modals/NameModal'
-import { AiFillGift } from 'react-icons/ai'
-
-import socket from '../socketConnect'
 
 const BotNav = () => {
-  const showServerUserList = () => {
-    socket.emit('displayUsers')
-  }
-
   return (
     <Flex
       position="fixed"
@@ -20,9 +13,6 @@ const BotNav = () => {
       p="2"
     >
       <NameModal />
-      <IconButton size="sm" onClick={showServerUserList}>
-        <AiFillGift />
-      </IconButton>
     </Flex>
   )
 }

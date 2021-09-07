@@ -13,7 +13,6 @@ import {
   Button,
   Stack,
   FormLabel,
-  IconButton,
   Text,
   Flex,
   Image,
@@ -72,9 +71,14 @@ const NameModal = () => {
 
   return (
     <>
-      <IconButton colorScheme="blue" onClick={onOpen} size="sm">
-        <AiOutlineUser />
-      </IconButton>
+      <Button
+        leftIcon={<AiOutlineUser />}
+        colorScheme="blue"
+        onClick={onOpen}
+        size="sm"
+      >
+        Nombre
+      </Button>
       <Drawer
         isOpen={isOpen}
         placement="top"

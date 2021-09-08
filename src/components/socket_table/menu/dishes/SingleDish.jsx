@@ -1,9 +1,29 @@
 import { Flex, Stack, Text, Image, Box, Icon, Badge } from '@chakra-ui/react'
 import { GiMeat } from 'react-icons/gi'
+import useDishModalStore from '../../dishModalStore'
+
 const SingleDish = ({ dish }) => {
-  const { name, description, price } = dish
+  const { name, description, price, uuid } = dish
+  const setIsOpen = useDishModalStore((state) => state.setIsOpen)
+  const setCurrentDishUUID = useDishModalStore(
+    (state) => state.setCurrentDishUUID
+  )
+
+  const openDishModal = () => {
+    setCurrentDishUUID(uuid)
+    setIsOpen(true)
+  }
+
   return (
-    <Flex w="full" h="full" bg="#fefef3" p="2" rounded="md" shadow="lg">
+    <Flex
+      w="full"
+      h="full"
+      bg="#fefef3"
+      p="2"
+      rounded="md"
+      shadow="lg"
+      onClick={openDishModal}
+    >
       <Flex w="30%" minH="5rem" maxH="5rem">
         <Image
           src={dish.image}

@@ -1,4 +1,5 @@
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, HStack } from '@chakra-ui/react'
+import TipModal from '../modals/TipModal'
 import WaiterModal from '../modals/WaiterModal'
 import useTableStore from '../tableStore'
 
@@ -9,20 +10,18 @@ const TopNav = () => {
     <Flex
       position="fixed"
       top="0"
-      bg="#fee"
+      bg="#f2f2f2"
       zIndex="9"
       minH="10px"
       w="full"
       p="2"
       justify="space-between"
       align="center"
-      borderBottom="2px solid #1a1a1a"
+      borderBottom="2px solid #d0d0d0"
     >
-      <WaiterModal />
       <Text fontSize="18px" fontWeight="semibold">
         Mesa {tableNumber && tableNumber}
       </Text>
-      <WaiterModal />
     </Flex>
   )
 }

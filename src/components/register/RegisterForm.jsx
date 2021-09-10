@@ -21,6 +21,7 @@ const RegisterForm = () => {
   } = useForm()
 
   const onSubmit = (values) => {
+    setIsSubmitting(true)
     signIn('credentials', {
       email: values.email,
       password: values.password,
@@ -86,6 +87,7 @@ const RegisterForm = () => {
         isLoading={isSubmitting}
         type="submit"
         w="full"
+        disabled={isSubmitting ? true : false}
       >
         Crear
       </Button>

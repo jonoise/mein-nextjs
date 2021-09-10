@@ -21,6 +21,7 @@ const LoginForm = ({ csrfToken }) => {
   } = useForm()
 
   const onSubmit = (values) => {
+    setIsSubmitting(true)
     signIn('credentials', {
       email: values.email,
       password: values.password,
@@ -86,6 +87,7 @@ const LoginForm = ({ csrfToken }) => {
         isLoading={isSubmitting}
         type="submit"
         w="full"
+        disabled={isSubmitting ? true : false}
       >
         Entrar
       </Button>

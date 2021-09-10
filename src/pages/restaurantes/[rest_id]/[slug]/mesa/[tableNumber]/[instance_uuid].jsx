@@ -1,11 +1,12 @@
 import axiosWithJWT from '../../../../../../lib/axios'
 import TableLayout from '../../../../../../components/socket_table/TableLayout'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useToast } from '@chakra-ui/toast'
 import socket from '../../../../../../components/socket_table/socketConnect'
 import useTableStore from '../../../../../../components/socket_table/tableStore'
 
 const Instance_Uuid = ({ rest_id, tableNumber, instance_uuid }) => {
+  const [rest_exists, set_Rest_Exists] = useState(null)
   const initTable = useTableStore((state) => state.initTable)
   const setRestaurant = useTableStore((state) => state.setRestaurant)
   const setMenu = useTableStore((state) => state.setMenu)
@@ -19,25 +20,38 @@ const Instance_Uuid = ({ rest_id, tableNumber, instance_uuid }) => {
       socket.disconnect()
     }
   }, [])
+
+  // USE EFFECT PARA HACER FETCH DEL REST
   useEffect(() => {
-    const fetchRestaurantAndMenu = async () => {
+    const fetchRestaurant = async () => {
       const restaurant = await axiosWithJWT(
         'GET',
         `/restaurants/${rest_id}`,
         null,
         null
       )
-      const menu = await axiosWithJWT(
-        'GET',
-        `/menus/${restaurant.main_menu}`,
-        null,
-        null
-      )
       setRestaurant(restaurant)
-      setMenu(menu)
+      set_Rest_Exists(restaurant)
     }
-    fetchRestaurantAndMenu()
+    fetchRestaurant()
   }, [])
+
+  // USE EFFECT PARA HACER FETCH DEL MENU SI YA EL REST FUE FETCHEADO
+  useEffect(() => {
+    if (rest_exists) {
+      const fetchMenu = async () => {
+        const menu = await axiosWithJWT(
+          'GET',
+          `/menus/${rest_exists.main_menu}`,
+          null,
+          null
+        )
+        setMenu(menu)
+      }
+      fetchMenu()
+    }
+  }, [rest_exists])
+
   socket.on('connect', () => {
     socket.emit('new-user', instance_uuid)
   })

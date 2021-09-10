@@ -12,11 +12,17 @@ export default (req, res) => NextAuth(req, res, {
         Providers.Credentials({
             async authorize(credentials) {
                 const user = await credentialsManager(credentials)
+                // si el user trae error dirigimos al url pertinente
                 if (user.error) {
                     if (user.error.message === "already_exists") {
                         return Promise.reject(`/register?error=${user.error.query}`)
                     }
+                    if (user.error.message === "invalid_credentials") {
+                        return Promise.reject(`/login?error=${user.error.query}`)
+                    }
+
                 }
+                // de lo contrario retornamos el user
                 return user
             },
         }),
@@ -42,7 +48,7 @@ export default (req, res) => NextAuth(req, res, {
         async signIn(user, account, profile) {
             if (account.type === 'oauth') {
                 if (account.provider === 'google') {
-                    // TODO: POST REQUEST A GOOGLE ENDPOINT
+                    // TODO: POST REQUEST TO GOOGLE ENDPOINT
                     return true
 
                 }
@@ -57,7 +63,11 @@ export default (req, res) => NextAuth(req, res, {
         async session(session, user) {
             return session
         },
+        async redirect(url, baseUrl) {
+            return Promise.resolve(`dashboard`)
+        }
     },
+
 
     // Enable debug messages in the console if you are having problems
     debug: false,

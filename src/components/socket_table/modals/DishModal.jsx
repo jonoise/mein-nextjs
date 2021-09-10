@@ -11,13 +11,16 @@ import {
   Text,
   Image,
   Flex,
+  Spinner,
 } from '@chakra-ui/react'
-import { FaTimes } from 'react-icons/fa'
+import { FaArrowLeft } from 'react-icons/fa'
 import { useEffect, useRef, useState } from 'react'
 import useDishModalStore from '../dishModalStore'
 import axiosWithJWT from '../../../lib/axios'
+import useTableStore from '../tableStore'
 const DishModal = () => {
   const isOpen = useDishModalStore((state) => state.isOpen)
+  const stateCategory = useTableStore((state) => state.stateCategory)
   const setIsOpen = useDishModalStore((state) => state.setIsOpen)
   const currentDishUUID = useDishModalStore((state) => state.currentDishUUID)
   const setCurrentDishUUID = useDishModalStore(
@@ -60,33 +63,48 @@ const DishModal = () => {
         size="full"
       >
         <DrawerOverlay />
-        <DrawerContent bg={styles.dimWhite} color="black">
-          <DrawerHeader borderBottomWidth="1px" borderColor="black">
-            <Flex w="full" justify="space-between">
-              <Text>{dish && dish.name}</Text>
-              <Button onClick={onClose}>
-                <FaTimes />
-              </Button>
-            </Flex>
-          </DrawerHeader>
-
-          <DrawerBody p="0">
-            {!isLoading && dish ? (
+        {dish && !isLoading ? (
+          <DrawerContent bg={styles.dimWhite} color="black">
+            <DrawerHeader borderBottomWidth="1px" borderColor="black">
+              <Flex w="full" align="center">
+                <Button leftIcon={<FaArrowLeft />} onClick={onClose}>
+                  <Text>{stateCategory}</Text>
+                </Button>
+              </Flex>
+            </DrawerHeader>
+            <DrawerBody p="0">
               <Stack spacing="24px">
                 <VStack spacing="1" bg="red">
                   <Flex w="full" maxH="300px">
                     <Image src={dish.image} w="100%" objectFit="cover" />
                   </Flex>
                 </VStack>
-                <Stack fontSize="16px">
-                  <Text color={styles.black}>{dish.description}</Text>
+                <Stack fontSize="16px" px="2">
+                  <Text color={styles.black} fontSize="30px" fontWeight="bold">
+                    {dish.name}
+                  </Text>
+                  <Text fontSize="16px" color="#505050">
+                    {dish.description}
+                  </Text>
                 </Stack>
               </Stack>
-            ) : (
-              'loading...'
-            )}
-          </DrawerBody>
-        </DrawerContent>
+            </DrawerBody>
+          </DrawerContent>
+        ) : (
+          <DrawerContent>
+            <DrawerBody p="0">
+              <Flex w="full" h="full" justify="center" align="center">
+                <Spinner
+                  size="xl"
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="gray.200"
+                  color="blue.500"
+                />
+              </Flex>
+            </DrawerBody>
+          </DrawerContent>
+        )}
       </Drawer>
     </>
   )

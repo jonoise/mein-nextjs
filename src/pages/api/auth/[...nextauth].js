@@ -59,12 +59,19 @@ export default (req, res) => NextAuth(req, res, {
                 return true
             }
         },
-        // async jwt(token, user, account, profile, isNewUser) { return token }
-        async session(session, user) {
+        async jwt(token, user, account, profile, isNewUser) {
+            if (user) {
+                token.user = user
+            }
+            return token
+        },
+        async session(session, jwt) {
+            session.user = jwt.user
+            console.log("FINAL SESSION", session)
             return session
         },
         async redirect(url, baseUrl) {
-            return Promise.resolve(`dashboard`)
+            return Promise.resolve(`/dashboard`)
         }
     },
 

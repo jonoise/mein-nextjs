@@ -17,10 +17,12 @@ export const credentialsManager = async (credentials) => {
             })
             let {
                 account,
+                tokens
             } = login_res.data
 
             return {
                 ...account,
+                tokens,
                 error: null
             }
         } catch (error) {
@@ -42,6 +44,7 @@ export const credentialsManager = async (credentials) => {
         })
         let {
             account,
+            tokens,
             message
         } = register_res.data
 
@@ -55,6 +58,7 @@ export const credentialsManager = async (credentials) => {
         }
         return {
             ...account,
+            tokens,
             error: null
         }
     }

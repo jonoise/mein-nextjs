@@ -41,12 +41,15 @@ const login = () => {
 export default login
 
 export const getServerSideProps = async (context) => {
-  const { req, res } = context
-  const session = await getSession({ req })
+  const session = await getSession(context)
 
   if (session) {
-    res.writeHead(302, { Location: `/?message=userisauth` })
-    res.end()
+    return {
+      redirect: {
+        destination: `/?message=userisauth`,
+        permanent: false,
+      },
+    }
   }
 
   return {

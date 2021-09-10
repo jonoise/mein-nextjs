@@ -19,6 +19,7 @@ import useDishModalStore from '../dishModalStore'
 import axiosWithJWT from '../../../lib/axios'
 import useTableStore from '../tableStore'
 const DishModal = () => {
+  // TODO: THIS COMPONENT HAS A SPINNER THAT NEEDS TO BE REFACTORED
   const isOpen = useDishModalStore((state) => state.isOpen)
   const stateCategory = useTableStore((state) => state.stateCategory)
   const setIsOpen = useDishModalStore((state) => state.setIsOpen)

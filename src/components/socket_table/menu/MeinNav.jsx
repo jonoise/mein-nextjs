@@ -1,7 +1,5 @@
 import { Flex, Text, HStack } from '@chakra-ui/react'
-import TipModal from '../modals/TipModal'
-import WaiterModal from '../modals/WaiterModal'
-import useTableStore from '../tableStore'
+import useTableStore from '../../../stores/tableStore'
 
 const TopNav = () => {
   const tableNumber = useTableStore((state) => state.tableNumber)

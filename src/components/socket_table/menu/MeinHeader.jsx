@@ -1,4 +1,5 @@
-import useTableStore from '../tableStore'
+import useTableStore from '../../../stores/tableStore'
+
 import { VStack, Image, Text } from '@chakra-ui/react'
 
 const MeinHeader = () => {

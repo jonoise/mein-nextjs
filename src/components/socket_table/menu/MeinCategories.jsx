@@ -3,7 +3,7 @@ import { Flex, Text, HStack, Image } from '@chakra-ui/react'
 import { useState } from 'react'
 import SwiperCore, { Navigation, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import useTableStore from '../tableStore'
+import useTableStore from '../../../stores/tableStore'
 
 const MeinCategories = () => {
   const menu = useTableStore((state) => state.menu)

@@ -1,6 +1,7 @@
 import { Stack, Text, Flex } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import useTableStore from '../../tableStore'
+import useTableStore from '../../../../stores/tableStore'
+
 import SingleDish from './SingleDish'
 
 const CategoryItems = ({ stateCategory }) => {

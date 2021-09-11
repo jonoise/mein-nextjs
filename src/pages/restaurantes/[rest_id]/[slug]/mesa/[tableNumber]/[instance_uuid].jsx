@@ -3,7 +3,7 @@ import TableLayout from '../../../../../../components/socket_table/TableLayout'
 import { useEffect, useState } from 'react'
 import { useToast } from '@chakra-ui/toast'
 import socket from '../../../../../../components/socket_table/socketConnect'
-import useTableStore from '../../../../../../components/socket_table/tableStore'
+import useTableStore from '../../../../../../stores/tableStore'
 
 const Instance_Uuid = ({ rest_id, tableNumber, instance_uuid }) => {
   const [rest_exists, set_Rest_Exists] = useState(null)

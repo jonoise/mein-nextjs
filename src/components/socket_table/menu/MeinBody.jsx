@@ -1,5 +1,5 @@
 import { Stack, Text } from '@chakra-ui/react'
-import useTableStore from '../tableStore'
+import useTableStore from '../../../stores/tableStore'
 import RestaurantSpecifics from './dishes/RestaurantSpecifics'
 import CategoryItems from './dishes/CategoryItems'
 const MeinBody = () => {

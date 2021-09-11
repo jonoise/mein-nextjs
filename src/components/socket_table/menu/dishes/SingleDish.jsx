@@ -1,6 +1,6 @@
 import { Flex, Stack, Text, Image, Box, Icon, Badge } from '@chakra-ui/react'
 import { GiMeat } from 'react-icons/gi'
-import useDishModalStore from '../../dishModalStore'
+import useDishModalStore from '../../../../stores/dishModalStore'
 
 const SingleDish = ({ dish }) => {
   const { name, description, price, uuid } = dish

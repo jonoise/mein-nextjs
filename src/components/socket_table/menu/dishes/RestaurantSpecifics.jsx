@@ -1,5 +1,6 @@
 import axiosWithJWT from '../../../../lib/axios'
-import useTableStore from '../../tableStore'
+import useTableStore from '../../../../stores/tableStore'
+
 import { Text, VStack } from '@chakra-ui/react'
 import SingleDish from './SingleDish'
 

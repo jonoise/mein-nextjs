@@ -20,7 +20,7 @@ import {
 import { AiOutlineUser } from 'react-icons/ai'
 import { useRef, useState } from 'react'
 import socket from '../socketConnect'
-import useTableStore from '../tableStore'
+import useTableStore from '../../../stores/tableStore'
 
 const NameModal = () => {
   const [userName, setUserName] = useState('')

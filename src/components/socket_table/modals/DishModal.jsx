@@ -15,9 +15,9 @@ import {
 } from '@chakra-ui/react'
 import { FaArrowLeft } from 'react-icons/fa'
 import { useEffect, useRef, useState } from 'react'
-import useDishModalStore from '../dishModalStore'
+import useDishModalStore from '../../../stores/dishModalStore'
 import axiosWithJWT from '../../../lib/axios'
-import useTableStore from '../tableStore'
+import useTableStore from '../../../stores/tableStore'
 const DishModal = () => {
   // TODO: THIS COMPONENT HAS A SPINNER THAT NEEDS TO BE REFACTORED
   const isOpen = useDishModalStore((state) => state.isOpen)

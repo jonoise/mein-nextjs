@@ -1,6 +1,6 @@
 import { getSession } from 'next-auth/client'
 import { useEffect } from 'react'
-import { App } from '../../../components/dashboardShell/App'
+import { App } from '../../../components/dashboard/shell/App'
 import useDashboardStore from '../../../stores/dashboardStore'
 const RestSlug = ({ section }) => {
   const setDashboardSection = useDashboardStore(

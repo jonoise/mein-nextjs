@@ -1,4 +1,4 @@
-import { App } from '../../components/dashboardShell/App'
+import { App } from '../../components/dashboard/shell/App'
 import Navbar from '../../components/navbar/Navbar'
 import { Heading, Flex } from '@chakra-ui/react'
 import { getSession, useSession } from 'next-auth/client'

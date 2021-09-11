@@ -18,7 +18,7 @@ import { LogoutItem } from './LogoutItem'
 import { SearchField } from './SearchField'
 import { UserProfile } from './UserProfile'
 import { useSession } from 'next-auth/client'
-import useDashboardStore from '../../stores/dashboardStore'
+import useDashboardStore from '../../../stores/dashboardStore'
 import { useEffect } from 'react'
 
 export const Sidebar = (props) => {
@@ -35,10 +35,6 @@ export const Sidebar = (props) => {
       <Flex direction="column" flex="1" pt="5" pb="4" overflowY="auto" px="4">
         <Box mb="6">
           <Logo color={mode('blue.600', 'blue.400')} h="6" />
-        </Box>
-
-        <Box mb="6">
-          <SearchField />
         </Box>
 
         <Stack spacing="6" as="nav" aria-label="Sidebar Navigation">

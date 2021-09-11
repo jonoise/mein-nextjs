@@ -67,7 +67,6 @@ export default (req, res) => NextAuth(req, res, {
         },
         async session(session, jwt) {
             session.user = jwt.user
-            console.log("FINAL SESSION", session)
             return session
         },
         async redirect(url, baseUrl) {

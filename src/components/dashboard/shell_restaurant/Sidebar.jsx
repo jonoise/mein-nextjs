@@ -15,11 +15,9 @@ import { FaRegChartBar, FaRegBell, FaRegQuestionCircle } from 'react-icons/fa'
 import { Logo } from './Logo'
 import { NavLink } from './NavLink'
 import { LogoutItem } from './LogoutItem'
-import { SearchField } from './SearchField'
 import { UserProfile } from './UserProfile'
 import { useSession } from 'next-auth/client'
 import useDashboardStore from '../../../stores/dashboardStore'
-import { useEffect } from 'react'
 
 export const Sidebar = (props) => {
   const [session, loading] = useSession()
@@ -40,10 +38,16 @@ export const Sidebar = (props) => {
         <Stack spacing="6" as="nav" aria-label="Sidebar Navigation">
           <Stack spacing="1">
             <NavLink
-              href="/dashboard/restaurantes"
+              href="/dashboard"
+              label="General"
+              icon={IoRestaurantOutline}
+              isActive={dashboardSection === 'general'}
+            />
+            <NavLink
+              href="/dashboard/restaurants"
               label="Restaurantes"
               icon={IoRestaurantOutline}
-              isActive={dashboardSection === 'restaurantes'}
+              isActive={dashboardSection === 'restaurants'}
             />
             <NavLink
               id="menus"
@@ -54,17 +58,17 @@ export const Sidebar = (props) => {
             />
             <NavLink
               id="mesas"
-              href="/dashboard/mesas"
+              href="/dashboard/tables"
               label="Mesas"
               icon={BiChair}
-              isActive={dashboardSection === 'mesas'}
+              isActive={dashboardSection === 'tables'}
             />
             <NavLink
               id="comidas"
-              href="/dashboard/comidas"
+              href="/dashboard/dishes"
               label="Comidas"
               icon={GiHotMeal}
-              isActive={dashboardSection === 'comidas'}
+              isActive={dashboardSection === 'dishes'}
             />
             <NavLink
               id="stats"

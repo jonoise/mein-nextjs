@@ -1,25 +1,10 @@
-import { App } from '../../components/dashboard/shell/App'
-import Navbar from '../../components/navbar/Navbar'
-import { Heading, Flex } from '@chakra-ui/react'
+import IndexLayout from '../../components/dashboard/index/IndexLayout'
 import { getSession, useSession } from 'next-auth/client'
 
-const index = ({ section }) => {
-  const [session, loading] = useSession()
-  console.log(section)
+const index = () => {
   return (
     <>
-      {loading ? (
-        <Flex>
-          <Navbar />
-          <Heading>CARGANDO</Heading>
-        </Flex>
-      ) : (
-        session && (
-          <Flex>
-            <App />
-          </Flex>
-        )
-      )}
+      <IndexLayout />
     </>
   )
 }
@@ -27,7 +12,7 @@ const index = ({ section }) => {
 export default index
 
 export const getServerSideProps = async (context) => {
-  const { req, section } = context
+  const { req } = context
 
   const session = await getSession({ req })
   if (!session) {
@@ -40,8 +25,6 @@ export const getServerSideProps = async (context) => {
   }
 
   return {
-    props: {
-      section,
-    },
+    props: {},
   }
 }

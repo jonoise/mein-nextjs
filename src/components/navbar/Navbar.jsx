@@ -18,6 +18,9 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { handleQueryMessage } from './handleMessage'
 import { FaTimes } from 'react-icons/fa'
+import { ProfileDropdown } from './ProfileDropdown'
+import { Notification } from './Notification'
+import { useSession } from 'next-auth/client'
 
 const NAV_ITEMS = ['HOME', 'REGISTER', 'TEST']
 
@@ -26,7 +29,6 @@ const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure()
   const [blackBg, setBlackBg] = useState(false)
   const [message, setMessage] = useState(null)
-
   useEffect(() => {
     // Check query for errors
     handleQueryMessage(router.asPath, setMessage)
@@ -64,10 +66,10 @@ const Navbar = () => {
           py="2"
           w="full"
           transition=".4s all"
-          bg={blackBg ? '#1a1a1a' : null}
+          bg={blackBg ? '#f5c000' : null}
         >
           <Flex justify="space-between" w="full" align="center">
-            <Heading>Navbar</Heading>
+            <Logo />
             <Flex
               flex={{ base: 'full', lg: 'auto' }}
               ml={{ base: -2 }}
@@ -88,7 +90,11 @@ const Navbar = () => {
                 _hover={{ bg: '#1a1a1a' }}
               />
             </Flex>
-            <Menubar NAV_ITEMS={NAV_ITEMS} blackBg={blackBg} />
+            <HStack spacing="3">
+              <Menubar NAV_ITEMS={NAV_ITEMS} blackBg={blackBg} />
+              <Notification display={{ base: 'none', lg: 'inline-flex' }} />
+              <ProfileDropdown />
+            </HStack>
             <Flex
               position="absolute"
               top="60px"
@@ -118,7 +124,7 @@ export default Navbar
 const Logo = () => {
   return (
     <Box w={{ base: '220px', lg: '350px' }}>
-      <Image src="/svgs/arcoeeres_banner.svg" width="100" height="75" />
+      <Image src="/logoblack.svg" width="100" height="55" />
       {/* <Image src="https://user-images.githubusercontent.com/71573508/130567876-96301de4-4511-4ffb-8c07-cac75cb8c027.png" /> */}
     </Box>
   )

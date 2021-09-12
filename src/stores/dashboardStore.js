@@ -5,12 +5,19 @@ import {
 
 const useDashboardStore = create(devtools((set, get) => ({
     dashboardSection: null,
+    restaurants: null,
     setDashboardSection: (section) => {
         set(state => ({
             ...state,
             dashboardSection: section
         }))
-    }
+    },
+    setDashboardRestaurants: (restaurants) => {
+        set(state => ({
+            ...state,
+            restaurants
+        }))
+    },
 
 })))
 

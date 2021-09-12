@@ -41,7 +41,7 @@ export const ProfileDropdown = () => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    !loading && setUser(session.user)
+    !loading && session && setUser(session.user)
   }, [loading])
 
   return (

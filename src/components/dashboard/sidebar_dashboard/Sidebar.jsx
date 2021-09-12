@@ -24,7 +24,7 @@ export const Sidebar = (props) => {
   const dashboardSection = useDashboardStore((state) => state.dashboardSection)
   return (
     <Flex
-      bg={mode('gray.50', 'gray.800')}
+      bg="#efefef"
       direction="column"
       borderRightWidth="1px"
       width="64"
@@ -32,7 +32,7 @@ export const Sidebar = (props) => {
     >
       <Flex direction="column" flex="1" pt="5" pb="4" overflowY="auto" px="4">
         <Box mb="6">
-          <Logo color={mode('blue.600', 'blue.400')} h="6" />
+          <Logo h="6" />
         </Box>
 
         <Stack spacing="6" as="nav" aria-label="Sidebar Navigation">

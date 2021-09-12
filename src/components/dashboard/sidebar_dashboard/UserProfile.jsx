@@ -13,11 +13,7 @@ export const UserProfile = (props) => {
       <Avatar size="sm" name={name} src={image} />
       <Flex direction="column" fontWeight="medium">
         <Text fontSize="sm">{name}</Text>
-        <Text
-          fontSize="xs"
-          lineHeight="shorter"
-          color={mode('gray.600', 'gray.400')}
-        >
+        <Text fontSize="xs" lineHeight="shorter" color={'#1a1a1a'}>
           {email}
         </Text>
       </Flex>

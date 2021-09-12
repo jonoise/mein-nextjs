@@ -6,7 +6,7 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
     baseURL: process.env.API_URL || localAPIUrl,
     timeout: 5000,
     headers: {
-      Authorization: session ? 'Bearer ' + session.token.access : null,
+      Authorization: session ? 'Bearer ' + session.user.tokens.access : null,
       'content-type': 'application/json',
       accept: 'application/json',
     },
@@ -25,7 +25,7 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
         serverResponse.data.code === 'token_not_valid' &&
         serverResponse.statusText === 'Unauthorized'
       ) {
-        const refreshToken = session.token.refresh
+        const refreshToken = session.user.tokens.refresh
         if (refreshToken) {
           const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]))
 
@@ -33,11 +33,11 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
           const now = Math.ceil(Date.now() / 1000)
           if (tokenParts.exp > now) {
             return axiosInstance
-              .post('/accounts/token/refresh/', {
+              .post('/token/refresh/', {
                 refresh: refreshToken,
               })
               .then((response) => {
-                session.token.access = response.data.access
+                session.user.tokens.access = response.data.access
                 axiosInstance.defaults.headers['Authorization'] =
                   'Bearer ' + response.data.access
                 originalRequest.headers['Authorization'] =

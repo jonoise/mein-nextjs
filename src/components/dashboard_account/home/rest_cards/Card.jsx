@@ -1,14 +1,33 @@
-import { HStack, Badge, Flex, Stack, VStack, Text } from '@chakra-ui/react'
+import {
+  Link,
+  HStack,
+  Badge,
+  Flex,
+  Stack,
+  VStack,
+  Text,
+  Box,
+} from '@chakra-ui/react'
 import { TriangleDownIcon, TriangleUpIcon, MinusIcon } from '@chakra-ui/icons'
+import { motion } from 'framer-motion'
+
+const MotionBox = motion(Flex)
+
 const Card = ({ rest }) => {
   return (
-    <Flex
+    <MotionBox
       minW="280px"
       minH="220px"
       maxH="220px"
       bg="#dedeff"
       rounded="md"
       p="5"
+      as={'a'}
+      href={`/dashboard/restaurants/${rest.uuid}/`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      _hover={{ background: '#d0d0ff' }}
+      transition={{ duration: 1 }}
     >
       <Stack w="full">
         <Text fontSize="18px" fontWeight="semibold">
@@ -22,7 +41,7 @@ const Card = ({ rest }) => {
         </HStack>
         <Total rest={rest} />
       </Stack>
-    </Flex>
+    </MotionBox>
   )
 }
 
@@ -39,9 +58,9 @@ const Total = ({ rest }) => {
       justify="center"
       align="center"
     >
-      {rest.counting.last_month ? (
+      {rest.counting.total_last_month ? (
         <Text fontSize="26px" fontWeight="black">
-          ₡ {rest.counting.last_month}
+          ₡ {rest.counting.total_last_month}
         </Text>
       ) : (
         <MinusIcon />

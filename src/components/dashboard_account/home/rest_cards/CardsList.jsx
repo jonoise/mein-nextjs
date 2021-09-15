@@ -1,4 +1,4 @@
-import { HStack, Stack, Text } from '@chakra-ui/react'
+import { HStack, Stack, Text, Spinner, Flex } from '@chakra-ui/react'
 import useGeneralDashboardStore from '../../../../stores/generalDashboardStore'
 import AddCard from './AddCard'
 import Card from './Card'
@@ -7,21 +7,35 @@ const CardsList = ({ onOpen }) => {
   return (
     <>
       <Stack w="full">
-        <Text fontWeight="semibold">Restaurantes principales.</Text>
-        <HStack
-          w="full"
-          overflowX="scroll"
-          justifyContent="flex-start"
-          spacing="3"
-          p="5"
-          className="styledScrollbar"
-        >
-          {restaurants &&
-            restaurants.map((rest, index) => {
-              return <Card rest={rest} key={index} />
-            })}
-          <AddCard onOpen={onOpen} />
-        </HStack>
+        <Text fontWeight="semibold">Restaurantes</Text>
+        {restaurants ? (
+          <>
+            <HStack
+              w="full"
+              overflowX="scroll"
+              justifyContent="flex-start"
+              spacing="3"
+              p="5"
+              className="styledScrollbar"
+            >
+              {restaurants.map((rest, index) => {
+                return <Card rest={rest} key={index} />
+              })}
+              <AddCard onOpen={onOpen} />
+            </HStack>
+          </>
+        ) : (
+          //
+          <Flex
+            w="full"
+            minH="220px"
+            maxH="220px"
+            justify="center"
+            align="center"
+          >
+            <Spinner />
+          </Flex>
+        )}
       </Stack>
     </>
   )

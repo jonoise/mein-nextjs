@@ -1,9 +1,12 @@
 import { getSession } from 'next-auth/client'
 import axiosWithJWT from '../../../lib/axios'
-
+import GenericHead from '../../../components/generichead/GenericHead'
 const ResturantDetail = ({ rest }) => {
-  console.log(rest)
-  return <div></div>
+  return (
+    <>
+      <GenericHead title={`Restaurante - ${rest.name}`} />
+    </>
+  )
 }
 
 export default ResturantDetail

@@ -45,9 +45,9 @@ const Compo = () => {
       <AddRestaurantModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       <Welcome onOpen={onOpen} />
       <Divider border="5px" />
-      <Graph />
-      <Divider border="5px" />
       <CardsList onOpen={onOpen} />
+      <Divider border="5px" />
+      <Graph />
     </VStack>
   )
 }

@@ -1,4 +1,4 @@
-import IndexLayout from '../../components/dashboard/home/IndexLayout'
+import IndexLayout from '../../components/dashboard_account/home/IndexLayout'
 import { getSession, useSession } from 'next-auth/client'
 import GenericHead from '../../components/generichead/GenericHead'
 

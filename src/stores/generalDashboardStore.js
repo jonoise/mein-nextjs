@@ -3,7 +3,7 @@ import {
     devtools
 } from 'zustand/middleware'
 
-const useDashboardStore = create(devtools((set, get) => ({
+const useGeneralDashboardStore = create(devtools((set, get) => ({
     dashboardSection: null,
     restaurants: null,
     setDashboardSection: (section) => {
@@ -21,4 +21,4 @@ const useDashboardStore = create(devtools((set, get) => ({
 
 })))
 
-export default useDashboardStore
+export default useGeneralDashboardStore

@@ -17,11 +17,13 @@ import { NavLink } from './NavLink'
 import { LogoutItem } from './LogoutItem'
 import { UserProfile } from './UserProfile'
 import { useSession } from 'next-auth/client'
-import useDashboardStore from '../../../stores/dashboardStore'
+import useGeneralDashboardStore from '../../../stores/generalDashboardStore'
 
 export const Sidebar = (props) => {
   const [session, loading] = useSession()
-  const dashboardSection = useDashboardStore((state) => state.dashboardSection)
+  const dashboardSection = useGeneralDashboardStore(
+    (state) => state.dashboardSection
+  )
   return (
     <Flex
       bg={mode('gray.50', 'gray.800')}

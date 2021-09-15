@@ -33,3 +33,26 @@
   height: 0;
   border-top: 2px solid black;
 }
+
+.styledScrollbar {}
+
+.styledScrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+
+/* Track */
+.styledScrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.styledScrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+.styledScrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -17,19 +17,15 @@ import { NavLink } from './NavLink'
 import { LogoutItem } from './LogoutItem'
 import { UserProfile } from './UserProfile'
 import { useSession } from 'next-auth/client'
-import useDashboardStore from '../../../stores/dashboardStore'
+import useGeneralDashboardStore from '../../../stores/generalDashboardStore'
 
 export const Sidebar = (props) => {
   const [session, loading] = useSession()
-  const dashboardSection = useDashboardStore((state) => state.dashboardSection)
+  const dashboardSection = useGeneralDashboardStore(
+    (state) => state.dashboardSection
+  )
   return (
-    <Flex
-      bg="#efefef"
-      direction="column"
-      borderRightWidth="1px"
-      width="64"
-      {...props}
-    >
+    <Flex bg="#efefef" direction="column" borderRightWidth="1px" {...props}>
       <Flex direction="column" flex="1" pt="5" pb="4" overflowY="auto" px="4">
         <Box mb="6">
           <Logo h="6" />
@@ -42,12 +38,6 @@ export const Sidebar = (props) => {
               label="General"
               icon={GrBook}
               isActive={dashboardSection === 'general'}
-            />
-            <NavLink
-              href="/dashboard/restaurantes"
-              label="Restaurantes"
-              icon={IoRestaurantOutline}
-              isActive={dashboardSection === 'restaurants'}
             />
             <NavLink
               id="plans"

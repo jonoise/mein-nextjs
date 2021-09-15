@@ -1,9 +1,11 @@
-import IndexLayout from '../../components/dashboard/index/IndexLayout'
+import IndexLayout from '../../components/dashboard/general/IndexLayout'
 import { getSession, useSession } from 'next-auth/client'
+import GenericHead from '../../components/generichead/GenericHead'
 
 const index = () => {
   return (
     <>
+      <GenericHead title="Mein - Dashboard" />
       <IndexLayout />
     </>
   )

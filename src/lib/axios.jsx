@@ -7,8 +7,6 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
     timeout: 5000,
     headers: {
       Authorization: session ? 'Bearer ' + session.user.tokens.access : null,
-      'content-type': 'application/json',
-      accept: 'application/json',
     },
   })
 

@@ -11,7 +11,12 @@ import { IoRestaurantOutline } from 'react-icons/io5'
 import { BiLogOut, BiUser } from 'react-icons/bi'
 import { FiSettings } from 'react-icons/fi'
 import { GrBook } from 'react-icons/gr'
-import { FaDollarSign, FaRegBell, FaRegQuestionCircle } from 'react-icons/fa'
+import {
+  FaDollarSign,
+  FaRegBell,
+  FaRegQuestionCircle,
+  FaHome,
+} from 'react-icons/fa'
 import { Logo } from './Logo'
 import { NavLink } from './NavLink'
 import { LogoutItem } from './LogoutItem'
@@ -35,9 +40,9 @@ export const Sidebar = (props) => {
           <Stack spacing="1">
             <NavLink
               href="/dashboard"
-              label="General"
-              icon={GrBook}
-              isActive={dashboardSection === 'general'}
+              label="Restaurantes"
+              icon={FaHome}
+              isActive={dashboardSection === 'home'}
             />
             <NavLink
               id="plans"

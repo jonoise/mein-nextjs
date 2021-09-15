@@ -1,7 +1,7 @@
 import { VStack, Divider } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import useGeneralDashboardStore from '../../../stores/generalDashboardStore'
-import Welcome from '../general/Welcome'
+import Welcome from '../home/Welcome'
 import App from '../sidebar_dashboard/App'
 
 const PlansLayout = () => {

@@ -1,14 +1,12 @@
 import { Flex, VStack, Divider, useDisclosure } from '@chakra-ui/react'
 import { useEffect } from 'react'
-import { MobileTopBar } from '../sidebar_dashboard/MobileTopBar'
-import { Sidebar } from '../sidebar_dashboard/Sidebar'
 import useGeneralDashboardStore from '../../../stores/generalDashboardStore'
 import axiosWithJWT from '../../../lib/axios'
 import { useSession } from 'next-auth/client'
 import Welcome from './Welcome'
 import Graph from './rests_graph/Graph'
 import CardsList from './rest_cards/CardsList'
-import App from '../sidebar_dashboard/App'
+import App from '../sidebar_home/App'
 import AddRestaurantModal from '../modals/addRestaurant/AddRestaurantModal'
 
 const GeneralLayout = () => {
@@ -21,7 +19,7 @@ const GeneralLayout = () => {
   const [session, loading] = useSession()
 
   useEffect(() => {
-    setDashboardSection('general')
+    setDashboardSection('home')
     const fetchRestaurants = async () => {
       const rest = await axiosWithJWT(
         'GET',

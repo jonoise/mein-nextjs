@@ -21,6 +21,7 @@
     "react-hook-form": "^7.14.0",
     "react-icons": "^4.2.0",
     "react-redux": "7.2.2",
+    "recharts": "^2.1.2",
     "socket.io-client": "^4.2.0",
     "swiper": "^7.0.3",
     "zustand": "^3.5.10"

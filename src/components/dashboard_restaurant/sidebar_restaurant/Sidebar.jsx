@@ -25,16 +25,10 @@ export const Sidebar = (props) => {
     (state) => state.dashboardSection
   )
   return (
-    <Flex
-      bg={mode('gray.50', 'gray.800')}
-      direction="column"
-      borderRightWidth="1px"
-      width="64"
-      {...props}
-    >
+    <Flex bg="#efefef" direction="column" borderRightWidth="1px" {...props}>
       <Flex direction="column" flex="1" pt="5" pb="4" overflowY="auto" px="4">
         <Box mb="6">
-          <Logo color={mode('blue.600', 'blue.400')} h="6" />
+          <Logo h="6" />
         </Box>
 
         <Stack spacing="6" as="nav" aria-label="Sidebar Navigation">
@@ -44,12 +38,6 @@ export const Sidebar = (props) => {
               label="General"
               icon={IoRestaurantOutline}
               isActive={dashboardSection === 'general'}
-            />
-            <NavLink
-              href="/dashboard/restaurants"
-              label="Restaurantes"
-              icon={IoRestaurantOutline}
-              isActive={dashboardSection === 'restaurants'}
             />
             <NavLink
               id="menus"

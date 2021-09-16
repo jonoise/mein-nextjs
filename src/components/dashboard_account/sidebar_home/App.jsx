@@ -14,7 +14,7 @@ const App = (props) => {
           width="64"
         />
         <Flex ml={{ base: '0', md: '64' }} w="full">
-          <props.Compo />
+          {props.Compo && <props.Compo />}
           {props.SideCompo && <props.SideCompo />}
         </Flex>
       </Flex>

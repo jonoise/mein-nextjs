@@ -8,7 +8,7 @@ const PlansLayout = () => {
   const setDashboardSection = useGeneralDashboardStore(
     (state) => state.setDashboardSection
   )
-
+  // Set Dashboard Section
   useEffect(() => {
     setDashboardSection('plans')
   }, [])

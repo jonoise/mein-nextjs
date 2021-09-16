@@ -18,6 +18,7 @@ const GeneralLayout = () => {
   )
   const [session, loading] = useSession()
 
+  // Set Home Section
   useEffect(() => {
     setDashboardSection('home')
     const fetchRestaurants = async () => {

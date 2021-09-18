@@ -80,6 +80,7 @@ const EmailInput = () => {
           rounded="full"
           ml="-10"
           zIndex="3"
+          cursor="pointer"
         >
           Sí, quiero saber! 😊
         </Flex>

@@ -17,7 +17,9 @@ const axiosWithJWT = async (method, endpoint, obj, session) => {
     async (error) => {
       const originalRequest = error.config
       const serverResponse = error.response
-
+      if (serverResponse.status === 404) {
+        return Promise.resolve({ data: 'not found' })
+      }
       if (
         serverResponse.status === 401 &&
         serverResponse.data.code === 'token_not_valid' &&

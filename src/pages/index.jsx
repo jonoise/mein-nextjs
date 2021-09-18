@@ -4,7 +4,7 @@ import DefaultHead from '../components/head/DefaultHead'
 export default function Home() {
   return (
     <>
-      <DefaultHead>
+      <DefaultHead title="Mein Menu">
         <link
           href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"
           rel="stylesheet"

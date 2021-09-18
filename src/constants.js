@@ -15,3 +15,14 @@ export const containerSection = {
     justify: 'center',
     align: 'center',
 }
+
+
+export const colors = {
+    yellow: '#f5c000',
+    blue: '#5267f6',
+    green: '#6afdef',
+    purple: '#8d2ef0',
+    red: '#ec7965',
+    black: '#1a1a1a',
+    white: '#f2f2f2',
+}

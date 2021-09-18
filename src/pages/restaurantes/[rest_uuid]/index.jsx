@@ -18,7 +18,7 @@ export const getServerSideProps = async (context) => {
 
   const tables = await axiosWithJWT(
     'GET',
-    `/tables/?restaurant=${restaurant.id}`
+    `/tables/?restaurant=${restaurant.uuid}`
   )
 
   return {

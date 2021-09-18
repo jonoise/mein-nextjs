@@ -5,7 +5,7 @@ import { useToast } from '@chakra-ui/toast'
 import socket from '../../../../../../components/socket_table/socketConnect'
 import useTableStore from '../../../../../../stores/tableStore'
 
-const Instance_Uuid = ({ rest_id, tableNumber, instance_uuid }) => {
+const Instance_Uuid = ({ rest_uuid, tableNumber, instance_uuid }) => {
   const [rest_exists, set_Rest_Exists] = useState(null)
   const initTable = useTableStore((state) => state.initTable)
   const setRestaurant = useTableStore((state) => state.setRestaurant)
@@ -26,7 +26,7 @@ const Instance_Uuid = ({ rest_id, tableNumber, instance_uuid }) => {
     const fetchRestaurant = async () => {
       const restaurant = await axiosWithJWT(
         'GET',
-        `/restaurants/${rest_id}`,
+        `/restaurants/${rest_uuid}`,
         null,
         null
       )
@@ -72,7 +72,7 @@ const Instance_Uuid = ({ rest_id, tableNumber, instance_uuid }) => {
 export default Instance_Uuid
 
 export const getServerSideProps = async (context) => {
-  const { rest_id, slug, tableNumber, instance_uuid } = context.params
+  const { rest_uuid, slug, tableNumber, instance_uuid } = context.params
   // DO VERIFICATION WITH SERVER FOR THIS TABLE INSTACE
 
   const res = await axiosWithJWT(
@@ -93,7 +93,7 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      rest_id,
+      rest_uuid,
       slug,
       tableNumber,
       instance_uuid,

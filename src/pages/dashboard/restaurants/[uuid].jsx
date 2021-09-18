@@ -38,6 +38,12 @@ export const getServerSideProps = async (context) => {
 
   const rest = await axiosWithJWT('GET', `/restaurants/${uuid}/`, null, session)
 
+  if (rest === 'not found') {
+    return {
+      notFound: true,
+    }
+  }
+
   return {
     props: { rest },
   }

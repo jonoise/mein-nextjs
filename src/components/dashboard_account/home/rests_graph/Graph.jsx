@@ -13,7 +13,7 @@ const App = () => {
   return (
     <>
       <Stack w="full">
-        <Text fontWeight="semibold">
+        <Text fontSize="large" fontWeight="bold">
           Ganancias totales en los últimos 4 meses.
         </Text>
         <ResponsiveContainer width="100%" height={250}>

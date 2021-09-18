@@ -58,9 +58,9 @@ const Total = ({ rest }) => {
       justify="center"
       align="center"
     >
-      {rest.counting.total_last_month ? (
+      {rest._counting.total_last_month ? (
         <Text fontSize="26px" fontWeight="black">
-          ₡ {rest.counting.total_last_month}
+          ₡ {rest._counting.total_last_month}
         </Text>
       ) : (
         <MinusIcon />

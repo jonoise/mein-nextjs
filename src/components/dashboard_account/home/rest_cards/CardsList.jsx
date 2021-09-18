@@ -7,7 +7,9 @@ const CardsList = ({ onOpen }) => {
   return (
     <>
       <Stack w="full">
-        <Text fontWeight="semibold">Restaurantes</Text>
+        <Text fontSize="large" fontWeight="bold">
+          Restaurantes
+        </Text>
         {restaurants ? (
           <>
             <HStack

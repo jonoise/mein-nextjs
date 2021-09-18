@@ -4,6 +4,7 @@ import {
 } from 'zustand/middleware'
 
 const useTableStore = create(devtools((set, get) => ({
+    userName: '',
     instance_uuid: null,
     tableNumber: null,
     restaurant: null,
@@ -11,12 +12,19 @@ const useTableStore = create(devtools((set, get) => ({
     stateCategory: null,
     currentUser: null,
     users: {},
+    usersIds: [],
     totalAmount: 0,
     initTable: (payload) => {
         set(state => ({
             ...state,
             instance_uuid: payload.instance_uuid,
             tableNumber: payload.tableNumber,
+        }))
+    },
+    setUserName: (userName) => {
+        set(state => ({
+            ...state,
+            userName
         }))
     },
     setRestaurant: (restaurant) => {
@@ -44,7 +52,8 @@ const useTableStore = create(devtools((set, get) => ({
             users: {
                 ...state.users,
                 [newUser.id]: newUser
-            }
+            },
+            usersIds: [...state.usersIds, newUser.id]
         }))
     },
     setAddDish: (id, dish) => {

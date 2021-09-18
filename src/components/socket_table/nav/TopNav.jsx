@@ -1,6 +1,7 @@
 import { Flex, Text, HStack, IconButton, Center } from '@chakra-ui/react'
 import useTableStore from '../../../stores/tableStore'
 import { BiChair } from 'react-icons/bi'
+import TableModal from '../modals/TableModal'
 
 const TopNav = () => {
   const tableNumber = useTableStore((state) => state.tableNumber)
@@ -21,7 +22,7 @@ const TopNav = () => {
       <Text fontSize="18px" fontWeight="semibold">
         Mesa {tableNumber && tableNumber}
       </Text>
-      <TableButton />
+      <TableModal />
     </Flex>
   )
 }

@@ -25,9 +25,10 @@ import useTableStore from '../../../stores/tableStore'
 
 const NameModal = () => {
   const toast = useToast()
-  const [userName, setUserName] = useState('')
   const [isOpen, setIsOpen] = useState(true)
   const firstField = useRef()
+  const userName = useTableStore((state) => state.userName)
+  const setUserName = useTableStore((state) => state.setUserName)
   const instance_uuid = useTableStore((state) => state.instance_uuid)
   const tableNumber = useTableStore((state) => state.tableNumber)
 
@@ -41,23 +42,6 @@ const NameModal = () => {
 
   // Se agrega el user al state y al socket server.
   const addUserHandler = () => {
-    const newUser = {
-      id: socket.id,
-      name: userName,
-      instance_uuid,
-      dishes: [],
-      total: 0,
-    }
-
-    const exists = users[newUser.id]
-
-    if (exists) {
-      addUser(newUser)
-      socket.emit('rename', newUser)
-      setIsOpen(false)
-      return
-    }
-
     if (userName.length < 1) {
       toast({
         title: 'Ingresa tu nombre 😊',
@@ -66,6 +50,24 @@ const NameModal = () => {
       })
       return
     }
+
+    const newUser = {
+      id: socket.id,
+      name: userName,
+      instance_uuid,
+      dishes: [],
+      total: 0,
+    }
+
+    const user = users[newUser.id]
+
+    if (user) {
+      addUser({ ...user, name: userName })
+      socket.emit('rename', user)
+      setIsOpen(false)
+      return
+    }
+
     console.log(restaurant)
     addUser(newUser)
     socket.emit('addUser', instance_uuid, newUser)

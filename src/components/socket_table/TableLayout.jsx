@@ -2,6 +2,7 @@ import { Flex, useToast } from '@chakra-ui/react'
 import BotNav from './nav/BotNav'
 import Menu from './menu/Mein'
 import socket from './socketConnect'
+import TopNav from './nav/TopNav'
 
 const TableLayout = () => {
   const toast = useToast()
@@ -16,6 +17,7 @@ const TableLayout = () => {
 
   return (
     <Flex minH="100vh" direction="column">
+      <TopNav />
       <Menu />
       <BotNav />
     </Flex>

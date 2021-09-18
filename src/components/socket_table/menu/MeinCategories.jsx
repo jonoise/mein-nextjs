@@ -21,7 +21,9 @@ const MeinCategories = () => {
 
   return (
     <>
-      <Text pl="2">Desliza para más</Text>
+      <Text textAlign="center" fontSize="14px" fontWeight="semibold">
+        🠔 desliza para más 🠖
+      </Text>
       <Flex p="2">
         <Swiper
           loop={true}
@@ -63,4 +65,5 @@ const categoryIcon = {
   Carnes: '/menu_categories/meat.png',
   Mariscos: '/menu_categories/seafood.png',
   Pastas: '/menu_categories/pasta.svg',
+  Bebidas: '/menu_categories/cocktail.png',
 }

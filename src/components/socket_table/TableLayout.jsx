@@ -19,7 +19,7 @@ const TableLayout = () => {
 
   return (
     <Flex minH="100vh" direction="column">
-      {rest && <GenericHead title={`Mesa ${tableNumber} del ${rest.name}`} />}
+      {rest && <GenericHead title={`Mesa ${tableNumber} de ${rest.name}`} />}
       <TopNav />
       <Menu />
       <BotNav />

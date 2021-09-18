@@ -2,7 +2,7 @@ export const responsiveFlexDirection = {
     base: 'column',
     lg: 'row'
 }
-
+export const fallbackImage = '/fallback.png'
 export const localAPIUrl = "http://localhost:8000/api"
 
 export const containerSection = {

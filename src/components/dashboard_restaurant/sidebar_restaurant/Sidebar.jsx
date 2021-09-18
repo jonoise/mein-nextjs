@@ -9,7 +9,8 @@ import {
 } from '@chakra-ui/react'
 import { IoRestaurantOutline } from 'react-icons/io5'
 import { BiChair, BiLogOut, BiUser } from 'react-icons/bi'
-import { FiBookOpen } from 'react-icons/fi'
+import { FiBookOpen, FiSettings } from 'react-icons/fi'
+import { MdKitchen } from 'react-icons/md'
 import { GiHotMeal } from 'react-icons/gi'
 import { FaRegChartBar, FaRegBell, FaRegQuestionCircle } from 'react-icons/fa'
 import { Logo } from './Logo'
@@ -18,9 +19,12 @@ import { LogoutItem } from './LogoutItem'
 import { UserProfile } from './UserProfile'
 import { useSession } from 'next-auth/client'
 import useGeneralDashboardStore from '../../../stores/generalDashboardStore'
+import restaurantStore from '../../../stores/restaurantDetailStore'
 
 export const Sidebar = (props) => {
   const [session, loading] = useSession()
+  const restaurant = restaurantStore((state) => state.restaurant)
+
   const dashboardSection = useGeneralDashboardStore(
     (state) => state.dashboardSection
   )
@@ -40,29 +44,46 @@ export const Sidebar = (props) => {
               isActive={dashboardSection === 'general'}
             />
             <NavLink
+              id="cocina"
+              href={
+                restaurant && `/dashboard/restaurants/${restaurant.uuid}/cocina`
+              }
+              label="Cocina"
+              icon={MdKitchen}
+              isActive={dashboardSection === 'cocina'}
+            />
+            <NavLink
               id="menus"
-              href="/dashboard/menus"
+              href={
+                restaurant && `/dashboard/restaurants/${restaurant.uuid}/menus`
+              }
               label="Menus"
               icon={FiBookOpen}
               isActive={dashboardSection === 'menus'}
             />
             <NavLink
               id="mesas"
-              href="/dashboard/tables"
+              href={
+                restaurant && `/dashboard/restaurants/${restaurant.uuid}/tables`
+              }
               label="Mesas"
               icon={BiChair}
               isActive={dashboardSection === 'tables'}
             />
             <NavLink
               id="comidas"
-              href="/dashboard/dishes"
+              href={
+                restaurant && `/dashboard/restaurants/${restaurant.uuid}/dishes`
+              }
               label="Comidas"
               icon={GiHotMeal}
               isActive={dashboardSection === 'dishes'}
             />
             <NavLink
               id="stats"
-              href="/dashboard/stats"
+              href={
+                restaurant && `/dashboard/restaurants/${restaurant.uuid}/stats`
+              }
               label="Estadísticas"
               icon={FaRegChartBar}
               isActive={dashboardSection === 'stats'}
@@ -72,8 +93,8 @@ export const Sidebar = (props) => {
           <Divider />
 
           <Stack spacing="1">
-            <NavLink label="Perfil" icon={BiUser} />
-            <NavLink label="Notificaciones" icon={FaRegBell} />
+            <NavLink label="Configuración" icon={FiSettings} />
+            <NavLink label="Eventos" icon={FaRegBell} />
             <NavLink label="Centro de Ayuda" icon={FaRegQuestionCircle} />
             <LogoutItem label="Salir" icon={BiLogOut} />
           </Stack>

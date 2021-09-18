@@ -16,6 +16,7 @@ import {
   Text,
   Flex,
   Image,
+  useToast,
 } from '@chakra-ui/react'
 import { AiOutlineUser } from 'react-icons/ai'
 import { useRef, useState } from 'react'
@@ -23,6 +24,7 @@ import socket from '../socketConnect'
 import useTableStore from '../../../stores/tableStore'
 
 const NameModal = () => {
+  const toast = useToast()
   const [userName, setUserName] = useState('')
   const [isOpen, setIsOpen] = useState(true)
   const firstField = useRef()
@@ -57,6 +59,11 @@ const NameModal = () => {
     }
 
     if (userName.length < 1) {
+      toast({
+        title: 'Ingresa tu nombre 😊',
+        duration: 3000,
+        status: 'info',
+      })
       return
     }
     console.log(restaurant)

@@ -1,4 +1,4 @@
-import PlansLayout from '../../components/dashboard/plans/PlansLayout'
+import PlansLayout from '../../components/dashboard_account/plans/PlansLayout'
 import { getSession, useSession } from 'next-auth/client'
 import GenericHead from '../../components/generichead/GenericHead'
 

@@ -1,4 +1,4 @@
-import SettingsLayout from '../../components/dashboard/settings/SettingsLayout'
+import SettingsLayout from '../../components/dashboard_account/settings/SettingsLayout'
 import { getSession } from 'next-auth/client'
 import GenericHead from '../../components/generichead/GenericHead'
 

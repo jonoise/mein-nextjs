@@ -5,10 +5,12 @@ import {
   VStack,
   Flex,
   Text,
-  Box,
+  HStack,
+  Tooltip,
 } from '@chakra-ui/react'
+import { FaInstagram, FaTwitter } from 'react-icons/fa'
 import DefaultHead from '../components/head/DefaultHead'
-import { colors as color } from '../constants'
+import { colors as color, colors } from '../constants'
 export default function Home() {
   return (
     <>
@@ -46,6 +48,7 @@ export default function Home() {
           </Text>
           <Divider />
           <EmailInput />
+          <Footer />
         </VStack>
       </Flex>
     </>
@@ -60,10 +63,13 @@ const EmailInput = () => {
       </Text>
       <Flex>
         <Input
-          placeholder="ingresa tu correo electrónico"
-          border="1px solid black"
-          bg={color.white}
-          className="removeFocus"
+          placeholder="ingresa tu email"
+          bg={color.black}
+          color={colors.white}
+          border="none"
+          className="disableFocus"
+          rounded="full"
+          p="5"
         />
         <Flex
           w="250px"
@@ -79,9 +85,55 @@ const EmailInput = () => {
         </Flex>
       </Flex>
       <Text fontSize="xs" fontWeight="hairline" pt="2">
-        Los que rellenen su correo electrónico en esta fase, <br /> recibirán un
-        cupón que equivale a 2 meses GRATIS!
+        Los usuarios que rellenen su correo electrónico en esta fase, <br />{' '}
+        recibirán un cupón que equivale a 2 MESES GRATIS en el plan PRO!
       </Text>
     </>
   )
 }
+
+const Footer = () => {
+  return (
+    <HStack spacing="10" h="full">
+      {footerLinks.map((link) => {
+        return (
+          <Tooltip
+            placement="bottom"
+            hasArrow
+            label={link.label}
+            key={link.id}
+            bg="pink.500"
+          >
+            <Text
+              as="a"
+              href={link.href}
+              target="_blank"
+              fontSize="x-large"
+              color={link.color}
+              cursor="pointer"
+            >
+              {<link.icon />}
+            </Text>
+          </Tooltip>
+        )
+      })}
+    </HStack>
+  )
+}
+
+const footerLinks = [
+  {
+    id: 'twitter',
+    label: 'Twitter',
+    href: 'https://twitter.com/meincr',
+    icon: FaTwitter,
+    color: 'twitter.700',
+  },
+  {
+    id: 'ingragram',
+    label: 'Instagram',
+    href: 'https://instagram.com/mein.cr',
+    icon: FaInstagram,
+    color: 'pink.800',
+  },
+]

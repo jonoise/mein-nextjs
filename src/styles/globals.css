@@ -34,8 +34,6 @@
   border-top: 2px solid black;
 }
 
-.styledScrollbar {}
-
 .styledScrollbar::-webkit-scrollbar {
   width: 10px;
   height: 8px;
@@ -55,4 +53,17 @@
 /* Handle on hover */
 .styledScrollbar::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+
+/* ************************ */
+/* CHAKRA UI REMOVE OUTLINE */
+/* ************************ */
+
+.disableFocus:focus {
+  box-shadow: none !important;
+}
+
+.disableFocus[data-focus] {
+  box-shadow: none !important;
 }

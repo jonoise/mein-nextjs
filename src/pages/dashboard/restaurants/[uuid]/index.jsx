@@ -1,8 +1,8 @@
 import { getSession } from 'next-auth/client'
-import axiosWithJWT from '../../../lib/axios'
-import GenericHead from '../../../components/generichead/GenericHead'
-import RestaurantDashboardLayout from '../../../components/dashboard_restaurant/home/RestaurantDashboardLayout'
-import restaurantDetailStore from '../../../stores/restaurantDetailStore'
+import axiosWithJWT from '../../../../lib/axios'
+import GenericHead from '../../../../components/generichead/GenericHead'
+import RestaurantDashboardLayout from '../../../../components/dashboard_restaurant/home/RestaurantDashboardLayout'
+import restaurantDetailStore from '../../../../stores/restaurantDetailStore'
 import { useEffect } from 'react'
 
 const ResturantDetail = ({ rest }) => {

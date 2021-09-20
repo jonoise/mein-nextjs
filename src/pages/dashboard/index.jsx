@@ -25,6 +25,15 @@ export const getServerSideProps = async (context) => {
       },
     }
   }
+  console.log(session.user)
+  if (!session.user.is_owner) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
 
   return {
     props: {},

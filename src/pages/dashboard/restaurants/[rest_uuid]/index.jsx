@@ -24,7 +24,7 @@ export default ResturantDetail
 
 export const getServerSideProps = async (context) => {
   const { req } = context
-  const { uuid } = context.query
+  const { rest_uuid } = context.query
   const session = await getSession({ req })
 
   if (!session) {
@@ -36,7 +36,12 @@ export const getServerSideProps = async (context) => {
     }
   }
 
-  const rest = await axiosWithJWT('GET', `/restaurants/${uuid}/`, null, session)
+  const rest = await axiosWithJWT(
+    'GET',
+    `/restaurants/${rest_uuid}/`,
+    null,
+    session
+  )
 
   if (rest === 'not found') {
     return {

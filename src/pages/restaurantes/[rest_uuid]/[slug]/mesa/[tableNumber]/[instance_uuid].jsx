@@ -52,12 +52,8 @@ const Instance_Uuid = ({ rest_uuid, tableNumber, instance_uuid }) => {
     }
   }, [rest_exists])
 
-  socket.on('connect', () => {
-    socket.emit('new-user', instance_uuid)
-  })
-
   socket.on('userAdded', (user) => {
-    console.log(user)
+    console.log('rendered')
     toast({
       id: user,
       title: `${user.name} se unió a la mesa.`,

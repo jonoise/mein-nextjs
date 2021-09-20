@@ -61,6 +61,7 @@ const NameModal = () => {
       instance_uuid,
       dishes: [],
       total: 0,
+      // is_watching: null,
     }
 
     const user = users[newUser.id]
@@ -74,7 +75,7 @@ const NameModal = () => {
 
     console.log(restaurant)
     addUser(newUser)
-    socket.emit('addUser', instance_uuid, newUser)
+    socket.emit('addUser', newUser)
     setIsOpen(false)
   }
 

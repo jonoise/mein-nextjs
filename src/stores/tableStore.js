@@ -40,7 +40,6 @@ const useTableStore = create(devtools((set, get) => ({
     },
     addUser: (newUser) => {
         set(state => ({
-            ...state,
             currentUser: newUser,
             users: {
                 ...state.users,

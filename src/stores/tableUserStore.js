@@ -51,4 +51,4 @@ const tableUserStore = set => ({
     }
 })
 
-const tableUserStore = create(devtools(tableUserStore))
+export default create(devtools(tableUserStore))

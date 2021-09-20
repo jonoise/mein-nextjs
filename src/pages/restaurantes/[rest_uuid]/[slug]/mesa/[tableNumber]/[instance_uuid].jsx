@@ -2,7 +2,7 @@ import axiosWithJWT from '../../../../../../lib/axios'
 import TableLayout from '../../../../../../components/socket_table/TableLayout'
 import { useEffect, useState } from 'react'
 import { useToast } from '@chakra-ui/toast'
-import socket from '../../../../../../components/socket_table/socketConnect'
+import socket from '../../../../../../lib/socketConnect'
 import useTableStore from '../../../../../../stores/tableStore'
 
 const Instance_Uuid = ({ rest_uuid, tableNumber, instance_uuid }) => {
@@ -13,7 +13,7 @@ const Instance_Uuid = ({ rest_uuid, tableNumber, instance_uuid }) => {
   const toast = useToast()
   useEffect(() => {
     socket.connect('/')
-    socket.emit('joinTable', instance_uuid)
+    socket.emit('joinTable', instance_uuid, tableNumber)
     initTable({ instance_uuid, tableNumber })
 
     return () => {

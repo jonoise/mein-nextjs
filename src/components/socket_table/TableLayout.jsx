@@ -1,7 +1,7 @@
 import { Flex, useToast } from '@chakra-ui/react'
 import BotNav from './nav/BotNav'
 import Menu from './menu/Mein'
-import socket from './socketConnect'
+import socket from '../../lib/socketConnect'
 import TopNav from './nav/TopNav'
 import GenericHead from '../generichead/GenericHead'
 import useTableStore from '../../stores/tableStore'

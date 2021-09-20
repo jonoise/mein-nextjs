@@ -20,18 +20,22 @@ import {
 } from '@chakra-ui/react'
 import { AiOutlineUser } from 'react-icons/ai'
 import { useRef, useState } from 'react'
-import socket from '../socketConnect'
+import socket from '../../../lib/socketConnect'
+import tableUserStore from '../../../stores/tableUserStore'
 import useTableStore from '../../../stores/tableStore'
 
 const NameModal = () => {
   const toast = useToast()
   const [isOpen, setIsOpen] = useState(true)
   const firstField = useRef()
-  const userName = useTableStore((state) => state.userName)
-  const setUserName = useTableStore((state) => state.setUserName)
+
+  // SOCKET USER STATE
+  const userName = tableUserStore((state) => state.name)
+  const setUserName = tableUserStore((state) => state.setUserName)
+
+  // SOCKET TABLE STATE
   const instance_uuid = useTableStore((state) => state.instance_uuid)
   const tableNumber = useTableStore((state) => state.tableNumber)
-
   const users = useTableStore((state) => state.users)
   const addUser = useTableStore((state) => state.addUser)
   const restaurant = useTableStore((state) => state.restaurant)

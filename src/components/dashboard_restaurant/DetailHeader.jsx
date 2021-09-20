@@ -6,15 +6,15 @@ const Welcome = ({ section }) => {
 
   return (
     <>
-      {!restaurant ? (
-        <Spinner />
-      ) : (
+      {restaurant ? (
         <Stack direction="column" w="full">
           <Text color="#a0a0a0">{section}</Text>
           <Flex w="full" justify="space-between" align="flex-end">
             <Heading> {restaurant.name}</Heading>
           </Flex>
         </Stack>
+      ) : (
+        <Spinner />
       )}
     </>
   )

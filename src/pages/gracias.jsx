@@ -18,7 +18,9 @@ const gracias = () => {
         <Box maxW="200px">
           <Lottie animationData={confettiData} />
         </Box>
-        <Heading fontSize="24px">Yey! Ya formas parte del club. 😄</Heading>
+        <Heading fontSize={{ base: '16px', md: '24px' }}>
+          Yey! Ya formas parte del club. 😄
+        </Heading>
         <Text textAlign="center">
           Realmente es un honor contar con tu presencia desde una etapa tan
           temprana del proyecto. Muchas gracias por tu interés! 💓

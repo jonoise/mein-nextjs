@@ -30,6 +30,7 @@ const NameModal = () => {
   const firstField = useRef()
 
   // SOCKET USER STATE
+  const userID = tableUserStore((state) => state.id)
   const userName = tableUserStore((state) => state.name)
   const setUserName = tableUserStore((state) => state.setUserName)
 
@@ -56,7 +57,7 @@ const NameModal = () => {
     }
 
     const newUser = {
-      id: socket.id,
+      id: userID,
       name: userName,
       instance_uuid,
       dishes: [],
@@ -73,7 +74,6 @@ const NameModal = () => {
       return
     }
 
-    console.log(restaurant)
     addUser(newUser)
     socket.emit('addUser', newUser)
     setIsOpen(false)

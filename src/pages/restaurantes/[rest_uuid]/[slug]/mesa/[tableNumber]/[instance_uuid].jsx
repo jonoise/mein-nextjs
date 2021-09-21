@@ -4,22 +4,24 @@ import { useEffect, useState } from 'react'
 import { useToast } from '@chakra-ui/toast'
 import socket from '../../../../../../lib/socketConnect'
 import useTableStore from '../../../../../../stores/tableStore'
+import tableUserStore from '../../../../../../stores/tableUserStore'
 
 const Instance_Uuid = ({ rest_uuid, tableNumber, instance_uuid }) => {
   const [rest_exists, set_Rest_Exists] = useState(null)
   const initTable = useTableStore((state) => state.initTable)
   const setRestaurant = useTableStore((state) => state.setRestaurant)
   const setMenu = useTableStore((state) => state.setMenu)
+  const setUserId = tableUserStore((state) => state.setUserId)
   const toast = useToast()
+
   useEffect(() => {
-    socket.connect('/')
     socket.emit('joinTable', instance_uuid, tableNumber)
     initTable({ instance_uuid, tableNumber })
 
     return () => {
       socket.disconnect()
     }
-  }, [])
+  }, [socket])
 
   // USE EFFECT PARA HACER FETCH DEL REST
   useEffect(() => {
@@ -52,14 +54,35 @@ const Instance_Uuid = ({ rest_uuid, tableNumber, instance_uuid }) => {
     }
   }, [rest_exists])
 
+  socket.on('addUserId', (id) => {
+    console.log('rendered ID')
+    setUserId(id)
+  })
+
   socket.on('userAdded', (user) => {
     console.log('rendered')
     toast({
-      id: user,
       title: `${user.name} se unió a la mesa.`,
       position: 'top',
       status: 'success',
+      duration: 1800,
+      isClosable: true,
     })
+  })
+
+  socket.on('broadcastGreeting', (greeting) => {
+    console.log('rendered gg')
+    toast({
+      title: `${greeting}`,
+      position: 'top',
+      status: 'success',
+      duration: 1800,
+      isClosable: true,
+    })
+  })
+
+  socket.on('usersInRoom', (clients) => {
+    console.log('clients ', clients)
   })
 
   return <TableLayout />

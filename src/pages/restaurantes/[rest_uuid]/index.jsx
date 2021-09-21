@@ -1,6 +1,10 @@
+import { useToast } from '@chakra-ui/toast'
 import axiosWithJWT from '../../../lib/axios'
+import socket from '../../../lib/socketConnect'
 
 const index = ({ restaurant }) => {
+  const toast = useToast()
+
   return <h1>{restaurant.name}</h1>
 }
 

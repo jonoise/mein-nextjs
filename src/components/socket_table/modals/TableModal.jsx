@@ -17,9 +17,24 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import socket from '../../../lib/socketConnect'
+import useTableStore from '../../../stores/tableStore'
 const TableModal = () => {
   const firstField = useRef()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const instance_uuid = useTableStore((state) => state.instance_uuid)
+  const handleBroadcast = () => {
+    socket.emit('broadcastGreeting', 'un mensaje. UNO!', instance_uuid)
+  }
+
+  const handleDisplayUser = () => {
+    socket.emit('displayUsers')
+  }
+
+  const handleDisplayUserInInstance = () => {
+    socket.emit('displayUsersInRoom', instance_uuid)
+  }
+
   return (
     <>
       <TableButton onOpen={onOpen} />
@@ -48,29 +63,11 @@ const TableModal = () => {
 
           <DrawerBody>
             <Stack spacing="24px">
-              <VStack spacing="1"></VStack>
-              <Stack fontSize="16px">
-                <Text color={styles.black}>
-                  -Al ingresar tu nombre nuestro equipo de meseros podrá darte
-                  una atención más personalizada. 😊
-                </Text>
-                <Text color={styles.black} fontWeight="semibold">
-                  Además podrás:
-                </Text>
-                <Text color={styles.black}>
-                  🔔 Llamar a un mesero con el toque de un botón.
-                </Text>
-                <Text color={styles.black}>
-                  💵 Dividir la cuenta de manera individual si lo deseas.
-                </Text>
-                <Text color={styles.black}>
-                  🥗 Compartir sugerencias en tiempo real con los miembros de la
-                  mesa.
-                </Text>
-                <Text color={styles.black}>
-                  🥘 Aceptar recomendaciones de las demás personas de la mesa.
-                </Text>
-              </Stack>
+              <VStack spacing="1">
+                <Button onClick={handleBroadcast}>Broadcast</Button>
+                <Button onClick={handleDisplayUser}>Users Object</Button>
+                <Button onClick={handleDisplayUserInInstance}>instance</Button>
+              </VStack>
             </Stack>
           </DrawerBody>
 

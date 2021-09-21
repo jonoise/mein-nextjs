@@ -168,22 +168,12 @@ const SuscribeForm = ({ status, message, onValidated }) => {
           dangerouslySetInnerHTML={{ __html: error }}
         />
       )}
-      {status === 'error' && (
-        <div
-          onChange={handleRedirect()}
-          style={{ color: 'red' }}
-          dangerouslySetInnerHTML={{ __html: 'Ya estás inscrito en la lista!' }}
-        />
-      )}
-      {status === 'success' && (
-        <div onChange={handleRedirect()} style={{ color: 'green' }}>
-          Subscribed !
-        </div>
-      )}
       <Text fontSize="xs" fontWeight="hairline" pt="2">
         Los usuarios que rellenen su correo electrónico en esta fase, <br />{' '}
         recibirán un cupón que equivale a 2 MESES GRATIS en el plan PRO!
       </Text>
+      {status === 'error' && handleRedirect()}
+      {status === 'success' && handleRedirect()}
     </>
   )
 }

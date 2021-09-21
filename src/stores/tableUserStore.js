@@ -7,8 +7,6 @@ import {
 const tableUserStore = set => ({
     id: null,
     name: "",
-    tableNumber: null,
-    dishes: [],
     setUserId: (id) => {
         set(state => ({
             id

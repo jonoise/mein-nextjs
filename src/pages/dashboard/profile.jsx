@@ -1,4 +1,4 @@
-import IndexLayout from '../../components/dashboard/general/IndexLayout'
+import ProfileLayout from '../../components/dashboard_account/profile/ProfileLayout'
 import { getSession, useSession } from 'next-auth/client'
 import GenericHead from '../../components/generichead/GenericHead'
 
@@ -6,7 +6,7 @@ const profile = () => {
   return (
     <>
       <GenericHead title="Mein - Dashboard" />
-      <IndexLayout />
+      <ProfileLayout />
     </>
   )
 }

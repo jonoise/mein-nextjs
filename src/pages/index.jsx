@@ -7,10 +7,17 @@ import {
   Text,
   HStack,
   Tooltip,
+  Button,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/dist/client/router'
 import { FaInstagram, FaTwitter } from 'react-icons/fa'
 import DefaultHead from '../components/head/DefaultHead'
 import { colors as color, colors } from '../constants'
+import MailchimpSubscribe from 'react-mailchimp-subscribe'
+import { useState } from 'react'
+const url =
+  'https://meincr.us5.list-manage.com/subscribe/post?u=8b3e2921db60e3a06e3a0054a&amp;id=f2babc303f'
+
 export default function Home() {
   return (
     <>
@@ -47,7 +54,7 @@ export default function Home() {
             meseros y tu restaurante.
           </Text>
           <Divider />
-          <EmailInput />
+          <Suscriber />
           <Footer />
         </VStack>
       </Flex>
@@ -55,7 +62,72 @@ export default function Home() {
   )
 }
 
-const EmailInput = () => {
+const Suscriber = (props) => {
+  return (
+    <MailchimpSubscribe
+      url={url}
+      render={(props) => {
+        const { subscribe, status, message } = props
+        return (
+          <SuscribeForm
+            status={status}
+            message={message}
+            onValidated={(formData) => subscribe(formData)}
+          />
+        )
+      }}
+    />
+  )
+}
+
+const SuscribeForm = ({ status, message, onValidated }) => {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [email, setEmail] = useState(null)
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
+  let validateEmail = /\S+@\S+\.\S+/
+
+  const handleSubmit = async () => {
+    setLoading(true)
+    setError(null)
+    const validEmail = validateEmail.test(email)
+
+    if (!email || email.length < 1) {
+      setError('Ingresa tu correo 😉')
+      setLoading(false)
+
+      return null
+    }
+
+    if (!validEmail) {
+      setError('Ingresa un correo válido 😉')
+      setLoading(false)
+      return null
+    }
+
+    const isFormValidated = await onValidated({ EMAIL: email })
+    return email && email.indexOf('@') > -1 && isFormValidated
+  }
+
+  const handleKeyInput = (e) => {
+    setError(null)
+    if (e.target.keyCode === 13) {
+      e.preventDefault()
+      handleSubmit()
+    }
+    return null
+  }
+
+  const handleRedirect = () => {
+    router.push('/gracias')
+  }
+
+  const handleFormError = () => {
+    setError(null)
+    setLoading(false)
+  }
+
   return (
     <>
       <Text fontSize="sm" fontWeight="normal">
@@ -70,8 +142,11 @@ const EmailInput = () => {
           className="disableFocus"
           rounded="full"
           p="5"
+          onChange={(e) => setEmail(e.target.value)}
+          onKeyUp={(e) => handleKeyInput(e)}
+          type="email"
         />
-        <Flex
+        <Button
           w="250px"
           wordBreak=""
           bg="white"
@@ -80,11 +155,31 @@ const EmailInput = () => {
           rounded="full"
           ml="-10"
           zIndex="3"
-          cursor="pointer"
+          onClick={(e) => handleSubmit(e)}
+          isLoading={loading}
+          _loading={{ bg: 'white', opacity: 1 }}
         >
           Sí, quiero saber! 😊
-        </Flex>
+        </Button>
       </Flex>
+      {error && (
+        <div
+          style={{ color: 'red' }}
+          dangerouslySetInnerHTML={{ __html: error }}
+        />
+      )}
+      {status === 'error' && (
+        <div
+          onChange={handleRedirect()}
+          style={{ color: 'red' }}
+          dangerouslySetInnerHTML={{ __html: 'Ya estás inscrito en la lista!' }}
+        />
+      )}
+      {status === 'success' && (
+        <div onChange={handleRedirect()} style={{ color: 'green' }}>
+          Subscribed !
+        </div>
+      )}
       <Text fontSize="xs" fontWeight="hairline" pt="2">
         Los usuarios que rellenen su correo electrónico en esta fase, <br />{' '}
         recibirán un cupón que equivale a 2 MESES GRATIS en el plan PRO!
